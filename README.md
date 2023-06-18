@@ -13,10 +13,10 @@ El delivery de comidas de la ciudad “El Buen Sabor” ofrece a sus clientes un
 
 ## Tecnologías
 
-[<img src="https://github.com/devicons/devicon/raw/master/icons/react/react-original.svg" width="30">](https://es.react.dev/)
-[<img src="https://github.com/devicons/devicon/raw/master/icons/typescript/typescript-original.svg" width="30">](https://www.typescriptlang.org/)
-[<img src="https://github.com/devicons/devicon/raw/master/icons/html5/html5-original.svg" width="30">](https://developer.mozilla.org/es/docs/Web/HTML)
-[<img src="https://github.com/devicons/devicon/raw/master/icons/css3/css3-original.svg" width="30">](https://developer.mozilla.org/es/docs/Web/CSS)
-[<img src="https://github.com/devicons/devicon/raw/master/icons/bootstrap/bootstrap-original.svg" width="30">](https://getbootstrap.com/)
-[<img src="https://github.com/devicons/devicon/raw/master/icons/figma/figma-original.svg" width="30">](https://www.figma.com/login)
+[<img src="https://github.com/devicons/devicon/raw/master/icons/react/react-original.svg" width="50">](https://es.react.dev/)
+[<img src="https://github.com/devicons/devicon/raw/master/icons/typescript/typescript-original.svg" width="50">](https://www.typescriptlang.org/)
+[<img src="https://github.com/devicons/devicon/raw/master/icons/html5/html5-original.svg" width="50">](https://developer.mozilla.org/es/docs/Web/HTML)
+[<img src="https://github.com/devicons/devicon/raw/master/icons/css3/css3-original.svg" width="50">](https://developer.mozilla.org/es/docs/Web/CSS)
+[<img src="https://github.com/devicons/devicon/raw/master/icons/bootstrap/bootstrap-original.svg" width="50">](https://getbootstrap.com/)
+[<img src="https://github.com/devicons/devicon/raw/master/icons/figma/figma-original.svg" width="50">](https://www.figma.com/login)
 
