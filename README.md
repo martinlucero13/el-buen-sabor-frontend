@@ -5,7 +5,7 @@ El delivery de comidas de la ciudad “El Buen Sabor” ofrece a sus clientes un
 ## Integrantes
 
 - Santiago Tobias Lopez San Martin
-- Martin Alejandro Lucero
+- [Martin Alejandro Lucero](https://github.com/martinlucero13)
 
 ## Wireframe
 
