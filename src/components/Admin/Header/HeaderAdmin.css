@@ -1,0 +1,9 @@
+.header-admin {
+  background-color: #ff9e00;
+  margin-top: 70px;
+}
+
+.header-admin a {
+  color: black;
+  font-weight: bold;
+}
