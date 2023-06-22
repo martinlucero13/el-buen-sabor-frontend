@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { AuthProvider } from './components/Auth0/AuthProvider';
 import "./Index.css";
 
 // Configuración de Auth0
-import AuthProvider from "./components/Auth0/AuthProvider";
+
 
 // Recuperar el estado de autenticación almacenado en el localStorage
 const storedAuthState = JSON.parse(localStorage.getItem("authState") || "{}");
@@ -17,7 +18,7 @@ const initialAuthState = {
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <AuthProvider initialState={initialAuthState}>
+    <AuthProvider initialAuthState={initialAuthState}>
       <App />
     </AuthProvider>
   </React.StrictMode>,
