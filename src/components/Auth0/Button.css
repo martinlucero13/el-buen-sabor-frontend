@@ -1,0 +1,13 @@
+.navbar-btn {
+  margin-right: 2rem;
+}
+
+.navbar-btn i {
+  padding-right: 5px;
+}
+
+@media (max-width: 991px) {
+  .navbar-btn {
+    width: 250px;
+  }
+}
