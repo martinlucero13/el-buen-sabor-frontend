@@ -1,0 +1,26 @@
+.navbar {
+  max-height: 70px;
+  background-color: #ff9000;
+}
+
+.navbar-logo {
+  width: 150px;
+}
+
+.input-group {
+  border-radius: 10px;
+}
+
+.input-group .form-control {
+  background-color: #f8f9fa;
+}
+
+@media (max-width: 991px) {
+  .navbar {
+    max-height: min-content;
+  }
+
+  .navbar-logo {
+    width: 120px;
+  }
+}
