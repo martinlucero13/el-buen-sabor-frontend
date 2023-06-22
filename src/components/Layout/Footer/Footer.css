@@ -1,0 +1,10 @@
+.container-footer {
+  min-width: 100%;
+  background-color: #ff8500;
+}
+
+@media (min-width: 768px) {
+  .container-footer {
+    height: min-content;
+  }
+}
