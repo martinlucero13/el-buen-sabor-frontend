@@ -1,0 +1,58 @@
+#container-articulo-manufacturado-receta{
+    width: 1200px;
+
+    border-width:2px;
+    border-radius:22px;
+    border-style:solid;
+    border-color:black;
+    margin-top: 5%;
+    background-color: #ffffffbd;
+    min-width: 770px;
+    border-radius: 25px;
+}
+
+#grid-articulo-manufacturado-receta{
+    display :grid;
+    grid-template-columns: repeat(4, 25%);
+    
+}
+
+#boton-item-receta-ingrediente{
+    background-color: transparent;
+    border:0;
+    color: #000;
+ 
+}
+
+#button-agregar-articulo-manufacturado-receta{
+    margin-top: 60px;
+    background: #2DC653;
+    color: #FFFFFF;
+    width: 150px;
+    height: 38px;
+    margin-left: 25%;
+}
+
+#button-articulo-manufacturado-receta{
+    width: 150px;
+    height: 60px;
+    margin-bottom: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+#titulos-articulo-manufacturado-receta{
+    margin-top: 25px;
+    font-weight: bold;
+    font-size: 18px; 
+}
+
+#input-articulo-manufacturado-receta{
+    width: 198px;
+}
+
+#procedimiento-articulo-manufacturado-receta{
+    background: #E1E1E1;
+    border-radius: 10px;
+}
