@@ -1,0 +1,12 @@
+.col-titulo-p{
+    font-weight: bold;
+}
+
+#boton-receta{
+    background-color: #277DA1;
+    border-color: #277DA1;
+}
+
+#modal-receta-pedido-header, #modal-receta-pedido-body{
+    background-color: #FF9E00;
+}
