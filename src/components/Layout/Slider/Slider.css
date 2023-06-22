@@ -1,0 +1,13 @@
+.carousel {
+  margin-top: 4rem;
+}
+
+.carousel-item img {
+  max-height: 30rem;
+}
+
+@media (max-width: 991px) {
+  .carousel-item img {
+    height: 12rem;
+  }
+}
