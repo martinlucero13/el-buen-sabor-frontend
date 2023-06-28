@@ -1,0 +1,127 @@
+
+
+.orange-rectangle {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: 98vh;
+    
+}
+
+.data-informacion{
+    height: auto;
+    width: 400px;
+    margin-top: 8%;
+    margin-left: 5%;
+}
+
+.button-data-perfil{
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    margin-top: 8%;
+}
+
+  
+.orange-rectangle-inner {
+    background-color: #ff9e00;
+    height: 700px;
+    width: 450px;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
+    border-radius: 10px;
+}
+
+
+.rectangle-datos,
+.rectangle-pedidos,
+.rectangle-cerrar {
+  background: #ff9e00;
+  width: 100%;
+  height: 50px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  border-left: 0px;
+  border-right: 0px;
+  border-radius: 0%;
+  box-sizing: border-box;
+  color: #000;
+}
+
+.rectangle-datos:hover,
+.rectangle-pedidos:hover,
+.rectangle-cerrar:hover {
+  background-color: inherit;
+  border-color: inherit;
+}
+
+.rectangle-pedidos:disabled,
+.rectangle-datos:disabled {
+    background-color: inherit;
+    border-color: inherit;
+    color: #6C757D;
+}
+
+.rectangle-datos {
+    margin-top: auto;
+}
+
+.rectangle-cerrar {
+    margin-top: 40%;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.rectangle-pedidos{
+    border-top: 0px;
+    
+}
+
+.div-foto{
+    text-align: center;
+    font-size: 30px;
+}
+
+.contenedor-blanco-data{
+    width: 380px;
+    height: auto;
+    margin-top: 30px;
+    background-color: #F8F9FA;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.font-labels-datos-perfil,
+.font-info-datos-perfil{
+    font-size: 24px;
+    font-family: Roboto;
+    border: 0px;
+    text-align: center;
+}
+
+.font-labels-datos-perfil{
+    color: #6C757D;
+}
+
+.font-titulos-datos-perfil{
+    font-size: 35px;
+    font-family: Roboto;
+    border: 0px;
+}
+
+.font-info-datos-perfil{
+    color: #ADB5BD;
+    background: fixed;
+    align-items: center;
+    width: 380px;
+}
+.content {
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
