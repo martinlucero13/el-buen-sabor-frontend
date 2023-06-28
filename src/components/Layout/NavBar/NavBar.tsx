@@ -45,8 +45,8 @@ function NavBar(): JSX.Element {
   return (
     <Navbar fixed="top" expand="lg">
       <Container fluid>
-        <Nav.Link href="/">
-          <img src={logo} alt="el-buen-sabor" className="navbar-logo" />
+        <Nav.Link>
+          <img src={logo} onClick={handleNavigate} alt="el-buen-sabor" className="navbar-logo" />
         </Nav.Link>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
