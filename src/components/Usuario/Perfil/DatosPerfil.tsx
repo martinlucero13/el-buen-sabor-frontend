@@ -3,21 +3,35 @@ import { Form } from 'react-bootstrap';
 import "./DatosPerfil.css";
 import avatar from "../../../assets/avatar.png";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 
-export const DatosPerfil = () =>{
+export const DatosPerfil = () => {
     const { logout } = useAuth0();
-    const [showPersonalData, setShowPersonalData] = useState(true);
+    const { filtro } = useParams();
+    const [showPersonalData, setShowPersonalData] = useState(filtro === 'datos');
 
     const handleToggleContent = () => {
         setShowPersonalData(!showPersonalData);
     };
 
-    
     const handleLogout = () => {
         logout({ logoutParams: { returnTo: window.location.origin } });
     };
+
+    const cambiarFiltro = () => {
+        if(filtro === 'datos'){
+            setShowPersonalData(true);
+        }
+        else{
+            setShowPersonalData(false);
+        }
+    }
+
+    useEffect(() => {
+        cambiarFiltro();
+    }, [filtro]);
     
     return(
         <>
