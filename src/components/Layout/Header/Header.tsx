@@ -6,16 +6,16 @@ function HeaderHome(): JSX.Element {
     return (
         <Nav justify variant="tabs" className="header-home">
             <Nav.Item>
-                <Nav.Link as={Link} to="/productos/pizza">Pizzas</Nav.Link>
+                <Nav.Link as={Link} to="/productos/pizza" id='boton-pizzas'>Pizzas</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link as={Link} to="/productos/lomo">Lomos</Nav.Link>
+                <Nav.Link as={Link} to="/productos/lomo" id='boton-lomos'>Lomos</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link as={Link} to="/productos/hamburguesa">Burgers</Nav.Link>
+                <Nav.Link as={Link} to="/productos/hamburguesa" id='boton-burgers'>Burgers</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link as={Link} to="/productos/bebida">Bebibas</Nav.Link>
+                <Nav.Link as={Link} to="/productos/bebida" id='boton-bebidas'>Bebibas</Nav.Link>
             </Nav.Item>
         </Nav>
     );

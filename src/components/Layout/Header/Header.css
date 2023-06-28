@@ -3,7 +3,10 @@
   margin-top: 0px;
 }
 
-.header-home a {
-  color: black;
+#boton-pizzas, #boton-lomos, #boton-burgers, #boton-bebidas{
   font-weight: bold;
+  font-size: 20px;
+  color: #000;
+  margin-left: 20px;
+  margin-right: 20px;
 }

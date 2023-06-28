@@ -1,0 +1,26 @@
+#contenedor{
+    margin-top: 80px;
+}
+
+#form-buscar{
+    display: flex;
+}
+#form-control-buscar{
+    max-width: 45%;
+    margin-right: 5px;
+    min-width: 48px;
+}
+#fila-buscar{
+    min-width: 560px;
+}
+#tabla{
+    margin-top: 10px;
+    background-color: #212529;
+    color: #fff;
+    border-radius: 10px 10px 0px 0px;
+    min-width: 560px;
+}
+
+#tabla-titulo{
+    margin: 5px;
+}
