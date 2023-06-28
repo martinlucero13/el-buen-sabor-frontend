@@ -47,10 +47,33 @@
     border-radius: 30px;
     background-color: #F8F9FA;
     border: 1px solid #000;
+    padding: 0%;
 }
 
-.maxAltoImg {
+.maxAltoImg-detalle {
     max-height: 590px;
     max-height: 490px;
-    border-radius: 30px 30px 30px 30px;
+    border-radius: 30px 0px 0px 30px;
 }
+
+.maxAltoImg-item {
+    margin-top: 10px;
+}
+
+.fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+  
+  .fade-exit {
+    opacity: 1;
+  }
+  
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
