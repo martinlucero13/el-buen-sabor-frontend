@@ -13,17 +13,22 @@ function UserButton(): JSX.Element {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
-  const navigateToProfile = () => {
-    navigate("/perfil"); 
+  const navigateToProfileDatos = () => {
+    navigate("/perfil/datos"); 
   };
+
+  const navigateToProfilePedidos = () => {
+    navigate("/perfil/pedidos"); 
+  };
+
 
   return (
     <DropdownButton
       title={user?.name}
       variant="bi bi-person-fill btn btn-light navbar-btn"
     >
-      <Dropdown.Item onClick={navigateToProfile}>Perfil</Dropdown.Item>
-      <Dropdown.Item>Pedidos</Dropdown.Item>
+      <Dropdown.Item onClick={navigateToProfileDatos}>Perfil</Dropdown.Item>
+      <Dropdown.Item onClick={navigateToProfilePedidos}>Pedidos</Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item onClick={() => handleLogout()} style={{color: "#F94144"}}>Cerrar Sesión</Dropdown.Item>
     </DropdownButton>
