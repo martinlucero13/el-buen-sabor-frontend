@@ -54,7 +54,7 @@ export const DetalleArticuloManufacturado = () => {
                     <img
                         src={articuloManufacturado?.imagen.imagenUrl}
                         alt={articuloManufacturado?.denominacion}
-                        className="maxAltoImg"
+                        className="maxAltoImg-detalle"
                     />
                 </Col>
                 <Col>
