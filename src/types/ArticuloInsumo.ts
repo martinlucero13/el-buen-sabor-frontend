@@ -3,9 +3,10 @@ import { ArticuloInsumoStockActual } from "./ArticuloInsumoStockActual";
 import { ArticuloInsumoStockMinimo } from "./ArticuloInsumoStockMinimo";
 import { Rubro } from "./Rubro";
 import { UnidadMedida } from "./UnidadMedida";
+import { GenericTypes } from "./GenericTypes";
 
-export interface ArticuloInsumo {
-    id: number;
+export interface ArticuloInsumo  extends GenericTypes{
+
     denominacion: string;
     esInsumo: boolean;
     unidadMedida: UnidadMedida;
@@ -13,6 +14,5 @@ export interface ArticuloInsumo {
     articuloInsumoStockMinimo: ArticuloInsumoStockMinimo;
     articuloInsumoStockActual: ArticuloInsumoStockActual;
     rubro?: Rubro;
-
 
 }

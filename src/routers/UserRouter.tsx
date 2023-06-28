@@ -8,6 +8,7 @@ import { ListArticuloManufacturado } from "../components/Usuario/ArticuloManufac
 import { ConfirmarPedido } from "../components/CarritoCompras/ConfirmarPedido";
 import ListadoPedidoCarrito from '../components/CarritoCompras/ListaPedidosCarrito';
 import DetallePedidoSN from "../components/CarritoCompras/DetallePedidoSN";
+import { DatosPerfil } from "../components/Usuario/Perfil/DatosPerfil";
 
 
 function UserRouter(): JSX.Element {
@@ -20,6 +21,7 @@ function UserRouter(): JSX.Element {
                     <Route path="/" element={<Home />} />
                     <Route path="/productos/:termino" element={<ListArticuloManufacturado />} />
                     <Route path="/detalle/:id" element={<DetalleArticuloManufacturado />} />
+                    <Route path="/perfil" element={<DatosPerfil />} />
                     <Route path="/carrito" element={<ListadoPedidoCarrito />} />
                     <Route path="/carrito/confirmarPedido" element={<ConfirmarPedido />} />
                     <Route path="/carrito/confirmarPedido/detallePedido" element={<DetallePedidoSN />} />

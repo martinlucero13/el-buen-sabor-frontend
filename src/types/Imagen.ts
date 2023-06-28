@@ -1,5 +1,7 @@
-export interface Imagen {
-    id: number;
+import { GenericTypes } from "./GenericTypes";
+
+export interface Imagen extends GenericTypes{
+
     nombre: string;
     imagenUrl?: string;
 }
