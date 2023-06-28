@@ -21,7 +21,7 @@ function UserRouter(): JSX.Element {
                     <Route path="/" element={<Home />} />
                     <Route path="/productos/:termino" element={<ListArticuloManufacturado />} />
                     <Route path="/detalle/:id" element={<DetalleArticuloManufacturado />} />
-                    <Route path="/perfil" element={<DatosPerfil />} />
+                    <Route path="/perfil/:filtro" element={<DatosPerfil />} />
                     <Route path="/carrito" element={<ListadoPedidoCarrito />} />
                     <Route path="/carrito/confirmarPedido" element={<ConfirmarPedido />} />
                     <Route path="/carrito/confirmarPedido/detallePedido" element={<DetallePedidoSN />} />
