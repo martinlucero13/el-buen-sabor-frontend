@@ -21,8 +21,9 @@ const CarritoProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) =>
     const detallePedido: DetallePedido = {
       id: articulo.id,
       cantidad: 1,
-      subtotal: articulo.articuloManufacturadoPrecioVenta.precioVenta,
+      subTotal: articulo.articuloManufacturadoPrecioVenta.precioVenta,
       articuloManufacturado: articulo,
+      
     };
 
     const existeEnCarrito = carrito.some((item) => item.id === articulo.id);
@@ -49,31 +50,3 @@ const CarritoProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) =>
 };
 
 export default CarritoProvider;
-/*
-interface CarritoContextType {
-  carrito: ArticuloManufacturado[];
-  agregarAlCarrito: (articulo: ArticuloManufacturado) => void;
-}
-export const CarritoContext = createContext<CarritoContextType>({
-  carrito: [],
-  agregarAlCarrito: () => {},
-});
-
-const CarritoProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-  const [carrito, setCarrito] = useState<ArticuloManufacturado[]>([]);
-
-  const agregarAlCarrito = (articulo: ArticuloManufacturado) => {
-    const existeEnCarrito = carrito.some((item) => item.id === articulo.id);
-    if (!existeEnCarrito) {
-      setCarrito((prevCarrito) => [...prevCarrito, articulo]);
-    }
-  };
-
-  return (
-    <CarritoContext.Provider value={{ carrito, agregarAlCarrito }}>
-      {children}
-    </CarritoContext.Provider>
-  );
-};
-
-export default CarritoProvider;*/
