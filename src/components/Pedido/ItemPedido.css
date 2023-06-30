@@ -1,0 +1,21 @@
+#tabla-cuerpo{
+    
+    background-color: #fff;
+    color: #000;
+    min-width: 560px;
+    border: 1px solid black;  
+}
+#boton-detalle{
+    background-color: #F9C74F;
+    border: none;
+    color: #000;
+    min-width: 80%;
+}
+#boton-detalle:hover{
+    background-color: #ffb710;
+}
+
+.col-pedido{
+    padding: 5px;
+    border: 1px solid black;
+}

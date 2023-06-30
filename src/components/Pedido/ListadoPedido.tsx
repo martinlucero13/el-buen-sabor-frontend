@@ -1,6 +1,10 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { Button, Col, Container, Dropdown, DropdownButton, Form, FormControl, Row, Table } from "react-bootstrap";
 import './ListadoPedido.css';
+import { Pedido } from "../../types/Pedido";
+import { useAuth0 } from "@auth0/auth0-react";
+import { findAllPedidos } from "../../services/PedidoService";
+import ItemPedido from "./ItemPedido";
 
 const ListadoPedido: React.FC = () => {
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
@@ -17,6 +21,19 @@ const ListadoPedido: React.FC = () => {
 
   const handleFilter = (option: string) => {
     // Agregar lógica de filtrado según la opción seleccionada
+  };
+
+  const [pedidos, setPedidos] = useState<Pedido[]>([]);
+  const { getAccessTokenSilently } = useAuth0();
+
+  useEffect(() => {
+      getAllPedidos();
+  }, []);
+
+  const getAllPedidos = async () => {
+      const token = await getAccessTokenSilently();
+      const newPedidos = await findAllPedidos(token);
+      setPedidos(newPedidos);
   };
 
   return (
@@ -71,10 +88,11 @@ const ListadoPedido: React.FC = () => {
               <Col>Estado</Col>
               <Col>Detalles</Col>
             </Row>
-
-          <tbody>
-            {/* Agregar filas de pedidos */}
-          </tbody>
+            {
+              pedidos.map((item: Pedido, index: number) =>
+                  <ItemPedido key={index} {...item} />
+              )
+            }
         </Table>
       </Container>
     </>

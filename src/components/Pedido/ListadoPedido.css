@@ -15,12 +15,13 @@
 }
 #tabla{
     margin-top: 10px;
-    background-color: #212529;
-    color: #fff;
-    border-radius: 10px 10px 0px 0px;
-    min-width: 560px;
 }
 
 #tabla-titulo{
-    margin: 5px;
+    background-color: #212529;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 10px 10px 0px 0px;
+    min-width: 560px;
+    padding: 10px;
 }
