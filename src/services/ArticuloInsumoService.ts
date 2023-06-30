@@ -14,8 +14,8 @@ export async function findArticuloInsumoById(id: number, token: string) {
   return GenericService<ArticuloInsumo>(`articulos-insumos/${id}`, "GET", token);
 }
 
-export async function saveArticuloInsumo(articuloManufacturado: ArticuloInsumo, token: string) {
-  return GenericService<ArticuloInsumo>("articulos-insumos", "POST", token, articuloManufacturado);
+export async function saveArticuloInsumo(articuloInsumo: ArticuloInsumo, token: string) {
+  return GenericService<ArticuloInsumo>("articulos-insumos", "POST", token, articuloInsumo);
 }
 
 export async function updateArticuloInsumo(id: number, articuloInsumo: ArticuloInsumo, token: string) {
