@@ -12,7 +12,7 @@ export const ListadoPedidoCarrito= () =>{
 
     const { carrito,borrarItemPedido } = useContext(CarritoContext);
     const [carritoTotal, setCarrito] = useState<DetallePedido[]>();
-    
+
     
     const navigate = useNavigate();
 
@@ -95,16 +95,16 @@ export const ListadoPedidoCarrito= () =>{
                         carritoTotal.map((element: DetallePedido) => (
                         <Row key={element.id}>
                             <ItemPedidoCarrito
-                            id={element.id}
-                            idProducto={element.articuloManufacturado.id}
-                            nombre={element.articuloManufacturado.denominacion}
-                            rutaImagen={element.articuloManufacturado.imagen.imagenUrl}
-                            precioVenta={element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
-                            cantidad={element.cantidad}
-                            disponible={5}
-                            borrarProducto={borrarCarritoItemPedido}
-                            actualizarCantidad={actualizarCantidadProducto}
-                            />
+                                id={element.id}
+                                idProducto={element.articuloManufacturado.id}
+                                nombre={element.articuloManufacturado.denominacion}
+                                rutaImagen={element.articuloManufacturado.imagen.imagenUrl}
+                                precioVenta={element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
+                                cantidad={element.cantidad}
+                                disponible={5}
+                                borrarProducto={borrarCarritoItemPedido}
+                                actualizarCantidad={actualizarCantidadProducto}
+                                />
                         </Row>
                         ))
                     ) : (

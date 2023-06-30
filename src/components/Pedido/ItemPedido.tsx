@@ -2,10 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { Pedido } from "../../types/Pedido";
 import { Button, Col, Row } from "react-bootstrap";
 import './ItemPedido.css'
+import { useModal } from '../../hooks/useModal';
+import ModalDetallePedidoConfirmado from './ModalDetallePedidoConfirmado';
+
 
 function ItemPedido(props: Pedido): JSX.Element {
 
     const navigate = useNavigate();
+    const { showModal, handleClose } = useModal();
 
     function handleButtonClick() {
         navigate(`abm/${props.id}`);
@@ -37,9 +41,14 @@ function ItemPedido(props: Pedido): JSX.Element {
                     Estado del pedido
                 </Col>
                 <Col className="col-pedido">
-                    <Button id="boton-detalle">Detalle</Button>
+                    <Button id="boton-detalle" onClick={() => handleClose()}>Detalle</Button>
                 </Col>
             </Row>
+            <ModalDetallePedidoConfirmado
+                showModal={showModal}
+                handleClose={handleClose}
+                pedido={props}
+            />
         </>
     );
 }

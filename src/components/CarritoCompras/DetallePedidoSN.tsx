@@ -1,5 +1,5 @@
 import { Button, Col, Row, Container } from "react-bootstrap";
-import { ItemDetallePedidoDelivery } from "../Pedido/ItemDetallePedido";
+import { ItemDetallePedido } from "../Pedido/ItemDetallePedido";
 import { DetallePedido } from '../../types/DetallePedido';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "./DetallePedido.css";
@@ -135,11 +135,11 @@ export const DetallePedidoSN=()=>{
 
                     {pedido.detallePedido?.map((element: DetallePedido) =>
                     <Row key={element.id}>
-                        <ItemDetallePedidoDelivery
+                        <ItemDetallePedido
                             nombre= {element.articuloManufacturado.denominacion}
-                            tiempoPromedio= {Number(element.articuloManufacturado.tiempoEstimadoCocina)}
                             precioVenta= {element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
                             cantidad= {element.cantidad}
+                            subtotal= {element.cantidad*element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
                         />
                     </Row>
                     )}
