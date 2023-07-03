@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { Pedido } from "../../types/Pedido";
+import { Pedido } from "../../../types/Pedido";
 import { Button, Col, Row } from "react-bootstrap";
-import './ItemPedido.css'
-import { useModal } from '../../hooks/useModal';
-import ModalDetallePedidoConfirmado from './ModalDetallePedidoConfirmado';
+import '../ItemPedido.css'
+import { useModal } from '../../../hooks/useModal';
+import ModalDetallePedidoConfirmado from '../ModalDetallePedidoConfirmado';
 
-
-function ItemPedido(props: Pedido): JSX.Element {
+function ItemPedidoCocinero(props: Pedido): JSX.Element {
 
     const { showModal, handleClose } = useModal();
 
@@ -23,30 +21,29 @@ function ItemPedido(props: Pedido): JSX.Element {
                 </Col>
 
                 <Col className="col-pedido">
-                    { props.tipoEntregaPedido?.descripcion }
+                    {props.horaEstimadaFin}
                 </Col>
 
                 <Col className="col-pedido">
-                    { props.tipoPagoPedido?.descripcion }
+                    Hora Estimada
                 </Col>
-                <Col className="col-pedido">
-                    Estado del pago
-                </Col>
-                <Col className="col-pedido">
-                    Estado del pedido
-                </Col>
+
                 <Col className="col-pedido">
                     <Button id="boton-detalle" onClick={() => handleClose()}>Detalle</Button>
+                </Col>
+                <Col className="col-pedido">
+                    <Button id="boton-detalle-acciones">+ 10 min</Button>
+                    <Button id="boton-detalle-acciones">Listo</Button>
                 </Col>
             </Row>
             <ModalDetallePedidoConfirmado
                 showModal={showModal}
                 handleClose={handleClose}
                 pedido={props}
-                receta={false}
+                receta={true}
             />
         </>
     );
 }
 
-export default ItemPedido;
+export default ItemPedidoCocinero;

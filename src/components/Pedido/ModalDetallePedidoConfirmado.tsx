@@ -5,17 +5,19 @@ import { DetallePedido } from '../../types/DetallePedido';
 import { useEffect, useState } from 'react';
 import { findByPedidoId } from "../../services/DetallePedidoService";
 import { useAuth0 } from '@auth0/auth0-react';
+import { ItemDetallePedidoCocinero } from './Cocinero/ItemDetallePedidoCocinero';
 
 type Props = {
     showModal: boolean,
     handleClose: () => void,
-    pedido: Pedido
+    pedido: Pedido,
+    receta: boolean
 }
 
-export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido }: Props)=>{
+export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido, receta }: Props)=>{
+
     const [detallesPedido, setDetallePedido] = useState<DetallePedido[]>([]);
     const { getAccessTokenSilently } = useAuth0();
-
 
     const getDetallePedido = async () => {
         const token = await getAccessTokenSilently();
@@ -70,12 +72,20 @@ export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido }: P
 
                         {detallesPedido.map((element: DetallePedido) =>
                             <Row key={element.id}>
-                                <ItemDetallePedido
-                                    nombre= {element.articuloManufacturado.denominacion}
-                                    precioVenta= {element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
-                                    cantidad= {element.cantidad}
-                                    subtotal= {element.subTotal}
-                                />
+                                {!receta ? (
+                                    <ItemDetallePedido
+                                        nombre={element.articuloManufacturado.denominacion}
+                                        precioVenta={element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
+                                        cantidad={element.cantidad}
+                                        subtotal={element.subTotal}
+                                    />
+                                ): (
+                                    <ItemDetallePedidoCocinero
+                                        denominacion={element.articuloManufacturado.denominacion}
+                                        cantidad={element.cantidad}
+                                        idArticulo={element.articuloManufacturado.id}
+                                    />
+                                )}
                             </Row>
                         )}
                     </Modal.Body>
@@ -85,6 +95,6 @@ export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido }: P
         </>
     );
 
-    }
+}
 
 export default ModalDetallePedidoConfirmado;

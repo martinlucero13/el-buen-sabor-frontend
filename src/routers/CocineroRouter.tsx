@@ -6,6 +6,7 @@ import TableArticuloManufacturado from "../components/ArticuloManufacturado/Tabl
 import { ArticuloManufacturadoAbm } from '../components/ArticuloManufacturado/ArticuloManufacturadoAbm';
 import ArticuloManufacturadoReceta from "../components/ArticuloManufacturado/ArticuloManufacturadoReceta";
 import TableArticuloInsumo from '../components/ArticuloInsumo/TableArticuloInsumo';
+import ListadoPedidoCocinero from "../components/Pedido/Cocinero/ListadoPedidoCocinero";
 
 function CocineroRouter(): JSX.Element {
     return(
@@ -14,6 +15,7 @@ function CocineroRouter(): JSX.Element {
             <HeaderCocinero />
             <Routes>
                 <Route path="/rubros" element={<TableRubro />} />
+                <Route path="/pedidos" element={< ListadoPedidoCocinero/>} />
                 <Route path="/stock/articulom" element={<TableArticuloManufacturado />} />
                 <Route path="/stock/articulom/abm/:idArticulo" element={<ArticuloManufacturadoAbm />} />
                 <Route path="/stock/articulom/abm/receta/:idArticulo" element={<ArticuloManufacturadoReceta />} />

@@ -1,7 +1,6 @@
 
 import { Col } from "react-bootstrap";
 
-
 type ProductoParams = {
   nombre: string;
   cantidad: number;

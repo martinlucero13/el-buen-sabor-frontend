@@ -6,16 +6,23 @@
     border: 1px solid black;  
 }
 #boton-detalle{
-    background-color: #F9C74F;
+    background-color: transparent;
     border: none;
     color: #000;
     min-width: 80%;
 }
-#boton-detalle:hover{
-    background-color: #ffb710;
+#boton-detalle-acciones{
+    background-color: transparent;
+    border: none;
+    color: #000;
+    min-width: 50%;
+}
+#boton-detalle:hover,#boton-detalle-acciones:hover{
+    background-color: rgb(187, 181, 181);
 }
 
 .col-pedido{
     padding: 5px;
     border: 1px solid black;
+    text-align: center;
 }
