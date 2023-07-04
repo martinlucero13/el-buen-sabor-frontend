@@ -15,6 +15,10 @@
     margin-left: 5%;
 }
 
+.align-items-start {
+    align-items: flex-start;
+}
+
 .button-data-perfil{
     width: 200px;
     height: 50px;
@@ -117,11 +121,16 @@
     align-items: center;
     width: 380px;
 }
+
+.content-pedidos,
 .content {
     height: 100%;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.content{
     align-items: center;
 }

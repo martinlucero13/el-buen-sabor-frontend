@@ -5,12 +5,23 @@ import avatar from "../../../assets/avatar.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { findPedidoByCliente } from "../../../services/PedidoService";
+import { Pedido } from '../../../types/Pedido';
+import ItemPedidoCliente from './ItemPedidoCliente';
 
 export const DatosPerfil = () => {
     const { logout } = useAuth0();
     const { filtro } = useParams();
     const [showPersonalData, setShowPersonalData] = useState(filtro === 'datos');
+    const [pedidos, setPedidoCliente] = useState<Pedido[]>([]);
+    const { getAccessTokenSilently } = useAuth0();
+
+    const getAllArticuloManufacturados = async () => {
+        const token = await getAccessTokenSilently();
+        //Id del Cliente
+        const newPedido = await findPedidoByCliente(1,token);
+        setPedidoCliente(newPedido);
+    };
 
     const handleToggleContent = () => {
         setShowPersonalData(!showPersonalData);
@@ -28,6 +39,10 @@ export const DatosPerfil = () => {
             setShowPersonalData(false);
         }
     }
+
+    useEffect(() => {
+        getAllArticuloManufacturados();
+    }, []);
 
     useEffect(() => {
         cambiarFiltro();
@@ -169,17 +184,28 @@ export const DatosPerfil = () => {
                 </>
                 ) : (
                 <div className="data-informacion">
-                    <div className="content">
-                        <Row>
+                    <div className="content-pedidos">
+                        <Row className="align-items-start">
                             <Col className="font-titulos-datos-perfil">
                                 <strong>Mis Pedidos</strong>
                             </Col>
+                               
+                        </Row>
+                        <Row>
+                            {
+                                pedidos.map((item: Pedido) =>
+                                    <Col>
+                                        <ItemPedidoCliente
+                                        id={item.id}/>
+                                    </Col>
+                                )
+                            }
                         </Row>
                         
                     </div>
                 </div>
                 )}
-                </div>
+            </div>
             </Container>
         </>
     );
