@@ -3,13 +3,19 @@ import { Button, Col, Container, Dropdown, DropdownButton, Form, FormControl, Ro
 import './ListadoPedido.css';
 import { Pedido } from "../../types/Pedido";
 import { useAuth0 } from "@auth0/auth0-react";
-import { findAllPedidos } from "../../services/PedidoService";
+import { findAllPedidos, findPedidoByTermino } from "../../services/PedidoService";
 import ItemPedido from "./ItemPedido";
 
 const ListadoPedido: React.FC = () => {
-  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Agregar lógica de búsqueda
+    const token = await getAccessTokenSilently();
+    const newPedidos = await findPedidoByTermino(searchTerm, token);
+    setPedidos(newPedidos);
+  };
+  const handleSearchTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
   const [selectedOption, setSelectedOption] = useState('');
@@ -70,8 +76,16 @@ const ListadoPedido: React.FC = () => {
           </Col>
           <Col>
             <Form onSubmit={handleSearch} id="form-buscar">
-              <FormControl type="text" placeholder="Buscar Pedido" id="form-control-buscar" />
-              <Button variant="outline-success" type="submit">Buscar</Button>
+              <FormControl
+                type="text"
+                placeholder="Buscar Pedido"
+                id="form-control-buscar"
+                value={searchTerm}
+                onChange={handleSearchTermChange}
+              />
+              <Button variant="outline-success" type="submit">
+                Buscar
+              </Button>
             </Form>
           </Col>
         </Row>

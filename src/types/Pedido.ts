@@ -8,6 +8,8 @@ export interface Pedido extends GenericTypes{
     fecha: string;
     horaEstimadaFin: string;
     montoDescuento: number;
+    pagado: boolean;
+    estado: string;
     cliente: Cliente;
     tipoEntregaPedido?: TipoEntregaPedido;
     tipoPagoPedido?: TipoPagoPedido;

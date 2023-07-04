@@ -9,7 +9,12 @@ import ModalDetallePedidoConfirmado from './ModalDetallePedidoConfirmado';
 function ItemPedido(props: Pedido): JSX.Element {
 
     const { showModal, handleClose } = useModal();
-
+    var estado = "";
+    if(props.pagado === true){
+        estado = "SI";
+    }else{
+        estado = "NO"
+    }
     return(
         <>
             <Row id="tabla-cuerpo">
@@ -30,13 +35,13 @@ function ItemPedido(props: Pedido): JSX.Element {
                     { props.tipoPagoPedido?.descripcion }
                 </Col>
                 <Col className="col-pedido">
-                    Estado del pago
+                    {estado}
                 </Col>
                 <Col className="col-pedido">
-                    Estado del pedido
+                    {props.estado}
                 </Col>
                 <Col className="col-pedido">
-                    <Button id="boton-detalle" onClick={() => handleClose()}>Detalle</Button>
+                    <Button id="boton-detalle" onClick={handleClose}>Detalle</Button>
                 </Col>
             </Row>
             <ModalDetallePedidoConfirmado
