@@ -32,7 +32,6 @@ export const ModalRecetaPedido=(props: ProductoParams)=>{
 
         // Articulo Manufacturado Insumo
         const newArticulosManufacturadosInsumos = await findByArticuloManufacturado(newArticuloManufacturado.id, token);
-        console.log(newArticuloManufacturado.imagen.imagenUrl);
         // Articulo Insumo
         let articulosInsumosArray = [];
         for (const item of newArticulosManufacturadosInsumos) {
@@ -55,7 +54,7 @@ export const ModalRecetaPedido=(props: ProductoParams)=>{
                     <Row>
                         <Col><img className="imagen-receta-pedido" src={articuloManufacturado?.imagen.imagenUrl}></img></Col>
                         <Col>
-                            <h3>{articuloManufacturado?.denominacion}</h3>
+                            <h3 id="titulo-modal-receta">{articuloManufacturado?.denominacion}</h3>
                             <p>Tiempo Promedio: {articuloManufacturado?.tiempoEstimadoCocina}</p>
                         </Col>
                     </Row>
