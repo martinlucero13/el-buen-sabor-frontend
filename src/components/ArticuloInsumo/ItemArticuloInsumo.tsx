@@ -1,6 +1,5 @@
 import { Button } from "react-bootstrap";
 import { ArticuloInsumo } from '../../types/ArticuloInsumo';
-import { useModal } from "../../hooks/useModal";
 import ModalCrearArticuloInsumo from './ModalCrearArticuloInsumo';
 import { useState } from "react";
 import ModalComprarArticuloInsumo from "./ModalComprarArticuloInsumo";
