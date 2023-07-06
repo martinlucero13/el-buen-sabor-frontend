@@ -8,12 +8,21 @@ import ItemPedido from "./ItemPedido";
 
 const ListadoPedido: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const token = await getAccessTokenSilently();
-    const newPedidos = await findPedidoByTermino(searchTerm, token);
-    setPedidos(newPedidos);
+
+    if(searchTerm===""){
+      getAllPedidos();
+    }
+    else{
+      let newPedidos = await findPedidoByTermino(searchTerm, token);
+  
+      setPedidos(newPedidos);
+    }
   };
+
   const handleSearchTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };

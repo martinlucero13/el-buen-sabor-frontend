@@ -19,6 +19,7 @@ export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido, rec
     const [detallesPedido, setDetallePedido] = useState<DetallePedido[]>([]);
     const { getAccessTokenSilently } = useAuth0();
 
+
     const getDetallePedido = async () => {
         const token = await getAccessTokenSilently();
         const newDetalles: DetallePedido[] = await findByPedidoId(pedido.id,token);
@@ -57,7 +58,7 @@ export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido, rec
                             <Col><p className="col-titulo-p">Subtotal: $ {getSubTotal()}</p></Col>
                         </Row>
                         <Row>
-                            <Col><p className="col-titulo-p">Estado: </p></Col>
+                            <Col><p className="col-titulo-p">Estado: {pedido.estado}</p></Col>
                     
                             <Col><p className="col-titulo-p">Descuento:  ${pedido?.montoDescuento}</p></Col>
                         </Row>
