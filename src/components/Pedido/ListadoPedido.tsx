@@ -3,7 +3,7 @@ import { Button, Col, Container, Dropdown, DropdownButton, Form, FormControl, Ro
 import './ListadoPedido.css';
 import { Pedido } from "../../types/Pedido";
 import { useAuth0 } from "@auth0/auth0-react";
-import { findAllPedidos, findPedidoByTermino } from "../../services/PedidoService";
+import { findAllPedidos, findPedidoByTermino, findPedidoByEstado } from "../../services/PedidoService";
 import ItemPedido from "./ItemPedido";
 
 const ListadoPedido: React.FC = () => {
@@ -34,8 +34,15 @@ const ListadoPedido: React.FC = () => {
     handleFilter(option);
   };
 
-  const handleFilter = (option: string) => {
-    // Agregar lógica de filtrado según la opción seleccionada
+  const handleFilter = async (option: string) => {
+    const token = await getAccessTokenSilently();
+    if(option===""){
+      getAllPedidos();
+    }
+    else{
+      let newPedidos = await findPedidoByEstado(option, token);
+      setPedidos(newPedidos);
+    }
   };
 
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
@@ -63,21 +70,28 @@ const ListadoPedido: React.FC = () => {
               id="filter-dropdown"
               title={selectedOption || 'Filtrar por estado'}
             >
+
               <Dropdown.Item
                 eventKey="Cocina"
-                onSelect={() => handleSelect("Cocina")}
+                onClick={() => handleSelect("")}
+              >
+                Todos
+              </Dropdown.Item>
+              <Dropdown.Item
+                eventKey="Cocina"
+                onClick={() => handleSelect("Cocina")}
               >
                 Cocina
               </Dropdown.Item>
               <Dropdown.Item
                 eventKey="A Confirmar"
-                onSelect={() => handleSelect("A Confirmar")}
+                onClick={() => handleSelect("A Confirmar")}
               >
                 A Confirmar
               </Dropdown.Item>
               <Dropdown.Item
                 eventKey="Listo"
-                onSelect={() => handleSelect("Listo")}
+                onClick={() => handleSelect("Listo")}
               >
                 Listo
               </Dropdown.Item>

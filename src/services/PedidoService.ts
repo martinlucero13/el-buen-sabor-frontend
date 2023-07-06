@@ -9,6 +9,10 @@ export async function findPedidoByTermino(termino: string, token: string) {
   return GenericService<Pedido[]>(`pedidos/byTermino/${termino}`, "GET", token);
 }
 
+export async function findPedidoByEstado(estado: string, token: string) {
+  return GenericService<Pedido[]>(`pedidos/byEstado/${estado}`, "GET", token);
+}
+
 export async function findPedidoByCliente(idCliente: number, token: string) {
   return GenericService<Pedido[]>(`pedidos/byCliente/${idCliente}`, "GET", token);
 }
