@@ -65,7 +65,6 @@ export const ListadoPedidoCarrito = () => {
                                     rutaImagen={element.articuloManufacturado.imagen.imagenUrl}
                                     precioVenta={element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
                                     cantidad={element.cantidad}
-                                    disponible={5}
                                     borrarProducto={borrarCarritoItemPedido}
                                     actualizarCantidad={actualizarCantidadProducto}
                                 />
