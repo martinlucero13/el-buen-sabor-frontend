@@ -1,8 +1,10 @@
 import { Button, Col, Row, Container } from "react-bootstrap";
 import { ItemDetallePedido } from "../Pedido/ItemDetallePedido";
-import { DetallePedido } from '../../types/DetallePedido';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "./DetallePedido.css";
+
+//Types
+import { DetallePedido } from '../../types/DetallePedido';
 
 type ProductoParams = {
     detallePedido: DetallePedido[];

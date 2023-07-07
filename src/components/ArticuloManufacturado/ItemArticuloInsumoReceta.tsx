@@ -1,8 +1,12 @@
-import "./ArticuloManufacturadoReceta.css";
 import { Button, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import "./ArticuloManufacturadoReceta.css";
+
+//Types
 import { ArticuloInsumo } from '../../types/ArticuloInsumo';
+
+//Services
 import { findArticuloInsumoById } from "../../services/ArticuloInsumoService";
 
 type ProductoParams = {

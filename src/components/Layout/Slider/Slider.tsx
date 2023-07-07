@@ -1,5 +1,4 @@
 import "./Slider.css";
-import React from "react";
 import { Carousel } from "react-bootstrap";
 
 function Slider(): JSX.Element {

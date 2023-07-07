@@ -2,13 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { Rubro } from "../../types/Rubro";
-import { UnidadMedida } from '../../types/UnidadMedida';
+//Hook
 import { useAlert } from "../../hooks/useAlert";
+
+//Services
 import { findAllRubro, findRubroById } from "../../services/RubroService";
 import { findAllUnidadMedida, findUnidadMedidaById } from "../../services/UnidadMedidaService";
 import { saveArticuloInsumo,  updateArticuloInsumo } from "../../services/ArticuloInsumoService";
+
+//Types
 import { ArticuloInsumo } from '../../types/ArticuloInsumo';
+import { Rubro } from "../../types/Rubro";
+import { UnidadMedida } from '../../types/UnidadMedida';
+
+//Util
+import {validateNumericInput} from '../../util/numerosUtil';
 
 
 type Props = {
@@ -147,20 +155,22 @@ function ModalCrearArticuloInsumo({ showModal, handleClose, articuloInsumo }: Pr
     }
 
     const handleStockActualChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-        const { value } = event.target;
-            setValues((prevArticuloInsumo) => {
-            if (prevArticuloInsumo) {
-                return {
-                ...prevArticuloInsumo,
-                articuloInsumoStockActual: {
-                    ...prevArticuloInsumo.articuloInsumoStockActual,
-                    stockActual: parseFloat(value),
-                },
-                };
-            }
-        });
-    }
+      const { value } = event.target;
+      const stockActual = parseFloat(value);
+    
+      setValues((prevArticuloInsumo) => {
+        if (prevArticuloInsumo) {
+          return {
+            ...prevArticuloInsumo,
+            articuloInsumoStockActual: {
+              ...prevArticuloInsumo.articuloInsumoStockActual,
+              stockActual: isNaN(stockActual) || stockActual < 0 ? 0 : stockActual,
+            },
+          };
+        }
+        return prevArticuloInsumo;
+      });
+    };
 
     const handleStockMinimoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -192,9 +202,9 @@ function ModalCrearArticuloInsumo({ showModal, handleClose, articuloInsumo }: Pr
           if (
             values &&
             values.denominacion &&
-            values.articuloInsumoPrecioCompra.monto &&
-            values.articuloInsumoStockMinimo.stockMinimo &&
-            values.articuloInsumoStockActual.stockActual &&
+            values.articuloInsumoPrecioCompra.monto >0 &&
+            values.articuloInsumoStockMinimo.stockMinimo >0 &&
+            values.articuloInsumoStockActual.stockActual >-1 &&
             values.unidadMedida.denominacion &&
             values.rubro?.denominacion
           ) {
@@ -262,8 +272,9 @@ function ModalCrearArticuloInsumo({ showModal, handleClose, articuloInsumo }: Pr
                             type="number"
                             id="articuloInsumoStockMinimo"
                             name="articuloInsumoStockMinimo"
-                            placeholder="Ingrese stock mínimo"
+                            placeholder="Ingrese stock minimo"
                             min={0}
+                            onKeyDown={validateNumericInput}
                             value={values?.articuloInsumoStockMinimo.stockMinimo || ""}
                             onChange={handleStockMinimoChange}
                         />
@@ -277,6 +288,7 @@ function ModalCrearArticuloInsumo({ showModal, handleClose, articuloInsumo }: Pr
                             name="articuloInsumoStockActual"
                             placeholder="Ingrese stock actual"
                             min={0}
+                            onKeyDown={validateNumericInput}
                             value={values?.articuloInsumoStockActual.stockActual || ""}
                             onChange={handleStockActualChange}
                         />
@@ -290,6 +302,7 @@ function ModalCrearArticuloInsumo({ showModal, handleClose, articuloInsumo }: Pr
                             name="articuloInsumoPrecioCompra"
                             placeholder="Ingrese precio costo"
                             min={0}
+                            onKeyDown={validateNumericInput}
                             value={values?.articuloInsumoPrecioCompra.monto || ""}
                             onChange={handleInputChangePrecio}
                         />

@@ -1,8 +1,11 @@
 import { Button } from "react-bootstrap";
-import { ArticuloInsumo } from '../../types/ArticuloInsumo';
-import ModalCrearArticuloInsumo from './ModalCrearArticuloInsumo';
 import { useState } from "react";
+import ModalCrearArticuloInsumo from './ModalCrearArticuloInsumo';
 import ModalComprarArticuloInsumo from "./ModalComprarArticuloInsumo";
+
+//Types
+import { ArticuloInsumo } from '../../types/ArticuloInsumo';
+
 
 function ItemArticuloInsumo(props: ArticuloInsumo): JSX.Element {
 
@@ -26,9 +29,9 @@ function ItemArticuloInsumo(props: ArticuloInsumo): JSX.Element {
     };
 
     let color = '';
-    if (props.articuloInsumoStockActual.stockActual-props.articuloInsumoStockMinimo.stockMinimo  < 0) {
+    if (props.articuloInsumoStockActual.stockActual-props.articuloInsumoStockMinimo.stockMinimo  === 0) {
         color = '#F94144'; // Rojo
-    } else if (props.articuloInsumoStockActual.stockActual-props.articuloInsumoStockMinimo.stockMinimo === 0) {
+    } else if ((props.articuloInsumoStockActual.stockActual-props.articuloInsumoStockMinimo.stockMinimo) < 3 ) {
         color = '#F9C74F'; // Amarillo
     }
     // Estilos CSS según el color determinado
@@ -100,7 +103,6 @@ function ItemArticuloInsumo(props: ArticuloInsumo): JSX.Element {
             <ModalComprarArticuloInsumo
                 showModal={modalComprar}
                 handleClose={cerrarModalComprar}
-                id={props.id}
                 articuloInsumoStockActual={props.articuloInsumoStockActual}
             />
 

@@ -1,9 +1,12 @@
 import { useParams } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
-
 import Home from "../../Layout/Home/Home";
-import { ArticuloManufacturado } from "../../../types/ArticuloManufacturado";
 import { ItemArticuloManufacturado } from "./ItemArticuloManufacturado";
+
+//Types
+import { ArticuloManufacturado } from "../../../types/ArticuloManufacturado";
+
+//Hook
 import { useArticulosManufacturados } from "../../../hooks/useArticulosManufacturados";
 
 export function ListArticuloManufacturado() {
@@ -14,7 +17,7 @@ export function ListArticuloManufacturado() {
         <>
             <Home />
 
-            <Container fluid="md" className="mt-3" style={{ height: "100vh" }}>
+            <Container fluid="md" className="mt-3" style={{ height: "100vh"}}>
                 <Row>
                     {
                         articulosManufacturados.length !== 0

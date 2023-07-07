@@ -1,7 +1,10 @@
 import { Button } from "react-bootstrap";
-
-import { Rubro } from "../../types/Rubro";
 import ModalRubro from "./ModalRubro";
+
+//Types
+import { Rubro } from "../../types/Rubro";
+
+//Hook
 import { useModal } from "../../hooks/useModal";
 
 function ItemRubro(props: Rubro): JSX.Element {

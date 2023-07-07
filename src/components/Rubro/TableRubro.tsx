@@ -6,8 +6,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import ItemRubro from "./ItemRubro";
 import ModalRubro from "./ModalRubro";
 
+//Types
 import { Rubro } from "../../types/Rubro";
+
+//Hook
 import { useModal } from "../../hooks/useModal";
+
+//Services
 import { findAllRubro, findRubroById } from "../../services/RubroService";
 
 function TableRubro(): JSX.Element {

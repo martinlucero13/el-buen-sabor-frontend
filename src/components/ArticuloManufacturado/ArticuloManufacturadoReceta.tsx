@@ -1,11 +1,17 @@
-import { useState, useEffect, KeyboardEvent  } from "react";
+import { useState, useEffect  } from "react";
 import { Button, ListGroup, Form, Container } from "react-bootstrap";
 import { useParams,useNavigate } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
+import ItemArticuloInsumoReceta from "./ItemArticuloInsumoReceta";
+import "./ArticuloManufacturadoReceta.css";
+
+//Util
+import {validateNumericInput} from '../../util/numerosUtil';
 
 //types
 import { ArticuloInsumo } from '../../types/ArticuloInsumo';
 import { ArticuloManufacturadoInsumo } from '../../types/ArticuloManufacturadoInsumo';
+import { Receta } from '../../types/Receta';
 
 //Services
 import { findArticuloManufacturadoById } from "../../services/ArticuloManufacturadoService";
@@ -13,9 +19,7 @@ import { findArticuloInsumoById, findAllArticuloInsumo } from "../../services/Ar
 import { findByArticuloManufacturadoId, saveReceta, updateReceta } from "../../services/RecetaService";
 import { deleteArticuloManufacturadoInsumo, findByArticuloManufacturado, saveArticuloManufacturadoInsumo, updateArticuloManufacturadoInsumo } from "../../services/ArticuloManufacturadoInsumoService";
 
-import "./ArticuloManufacturadoReceta.css";
-import ItemArticuloInsumoReceta from "./ItemArticuloInsumoReceta";
-import { Receta } from '../../types/Receta';
+
 
 
 export const ArticuloManufacturadoReceta = () =>{
@@ -54,14 +58,6 @@ export const ArticuloManufacturadoReceta = () =>{
         const newArticuloInsumo= await findAllArticuloInsumo(token);
         setAllArticulosInsumos(newArticuloInsumo);
     };
-
-    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-        const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-        if (!allowedKeys.includes(event.key) && event.key !== 'Backspace') {
-            event.preventDefault();
-        }
-      };
 
     useEffect(() => {
         getReceta();
@@ -218,7 +214,7 @@ export const ArticuloManufacturadoReceta = () =>{
                     </Form.Group>
                     <Form.Group>
                         <Form.Label id="titulos-articulo-manufacturado-receta">Cantidad</Form.Label>
-                        <Form.Control name="cantidad" type="number" id="input" required  min={1} step={1} onKeyDown={handleKeyDown}/>
+                        <Form.Control name="cantidad" type="number" id="input" required  min={1} step={1} onKeyDown={validateNumericInput}/>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label id="titulos-articulo-manufacturado-receta">Unidad de Medida</Form.Label>

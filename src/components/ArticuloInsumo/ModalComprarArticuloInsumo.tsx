@@ -1,15 +1,20 @@
-import { saveArticuloInsumo,  updateArticuloInsumo } from "../../services/ArticuloInsumoService";
-import { ArticuloInsumo } from '../../types/ArticuloInsumo';
 import { useEffect,useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Form, Modal, Button } from 'react-bootstrap';
+
+//Types
 import { ArticuloInsumoStockActual } from '../../types/ArticuloInsumoStockActual';
+
+//Services
+import { comprarArticuloInsumo } from "../../services/ArticuloInsumoStockActualService";
+
+//Util
+import {validateNumericInput} from '../../util/numerosUtil';
 
 
 type Props = {
     showModal: boolean,
     handleClose: () => void,
-    id?: Number
     articuloInsumoStockActual?: ArticuloInsumoStockActual
 }
 
@@ -40,14 +45,16 @@ function ModalComprarArticuloInsumo({ showModal, handleClose, articuloInsumoStoc
     const handleSubmit = async () => {
         if (
             values &&
-            values.stockActual
+            cantidad>0
         ) {
             values.stockActual+=cantidad;
-            values.fecha== new Date();
+            const fechaActual = new Date();
+            values.fecha = fechaActual;
+            alert(values.fecha);
             const token = await getAccessTokenSilently();
             
             console.log("update")
-            //await updateArticuloInsumo(values.id, values, token);
+            await comprarArticuloInsumo(values.id, values, token);
             
             handleClose();
             window.location.reload();
@@ -73,9 +80,10 @@ function ModalComprarArticuloInsumo({ showModal, handleClose, articuloInsumoStoc
                             id="cantidad"
                             name="cantidad"
                             placeholder="Ingrese la cantidad"
-                            min={0}
+                            min={1}
                             value={cantidad}
                             onChange={handleCantidadChange}
+                            onKeyDown={validateNumericInput}
                         />
                     </Form.Group>
                 </Form>

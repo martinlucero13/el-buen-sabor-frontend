@@ -1,11 +1,15 @@
-import { Card } from "react-bootstrap"
+import { Card, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { ArticuloManufacturado } from "../../../types/ArticuloManufacturado"
-import { Button } from 'react-bootstrap';
 import { useContext,useState } from "react";
-import { CarritoContext } from "../../Context/CarritoContext";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './ArticuloManufacturado.css';
+
+//Types
+import { ArticuloManufacturado } from "../../../types/ArticuloManufacturado"
+
+//Context
+import { CarritoContext } from "../../Context/CarritoContext";
+
 
 export const ItemArticuloManufacturado = (props: ArticuloManufacturado) => {
     const { agregarAlCarrito } = useContext(CarritoContext);

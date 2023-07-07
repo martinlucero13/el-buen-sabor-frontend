@@ -1,85 +1,49 @@
-import { useEffect, useState, useContext } from 'react';
-
+import { useContext } from 'react';
 import { Container, Row, Button } from 'react-bootstrap';
-import "./ItemPedidoCarrito.css";
+import { useNavigate } from 'react-router-dom';
 import ItemPedidoCarrito from './ItemPedidoCarrito';
-import { useNavigate, useLocation } from 'react-router-dom';
+import "./ItemPedidoCarrito.css";
+
+//Context
 import { CarritoContext } from '../Context/CarritoContext';
+
+//Types
 import { DetallePedido } from '../../types/DetallePedido';
 
 
-export const ListadoPedidoCarrito= () =>{
-
-    const { carrito,borrarItemPedido } = useContext(CarritoContext);
-    const [carritoTotal, setCarrito] = useState<DetallePedido[]>();
-
-    
+export const ListadoPedidoCarrito = () => {
+    const { carrito, borrarItemPedido, actualizarCantidad } = useContext(CarritoContext);
     const navigate = useNavigate();
 
     function handleButtonClick() {
-        if(getCantidadTotalPedido()!==0){
-            navigate('confirmarPedido', { state: carritoTotal});
-        }
-        else{
+        if (getCantidadTotalPedido() !== 0) {
+            navigate('confirmarPedido', { state: carrito });
+        } else {
             alert("Debe tener al menos un producto....");
         }
     }
-    
-    const getPedidos = () => {
-        if(carrito){
-            setCarrito(carrito);
-        }
-    };
 
     function borrarCarritoItemPedido(id: number) {
         borrarItemPedido(id);
-        setCarrito((prevPedido) => {
-            if (!prevPedido) return prevPedido;
-            const detallePedidoFiltrado = prevPedido.filter(
-                (detallePedido) => detallePedido.articuloManufacturado.id !== id
-            );
-            
-            return detallePedidoFiltrado;
-        });
-        
     }
-    
+
     function actualizarCantidadProducto(id: number, cantidad: number) {
-        setCarrito((prevPedido) => {
-            if (!prevPedido || prevPedido.length === 0) return prevPedido;
-            const detallePedidoActualizado = prevPedido.map((detallePedido) => {
-                if (detallePedido.articuloManufacturado.id === id) {
-                    const nuevaCantidad = (detallePedido.cantidad = cantidad);
-                    if (nuevaCantidad > 5) {
-                        return { ...detallePedido, cantidad: 5 };
-                    } else {
-                        return { ...detallePedido, cantidad: nuevaCantidad };
-                    }
-                } else {
-                    return detallePedido;
-                }
-            }).filter((detallePedido) => detallePedido !== null) as DetallePedido[]; // Elimina los elementos nulos
-            return detallePedidoActualizado;
-        });
+        actualizarCantidad(id, cantidad);
     }
 
     const getCantidadTotalPedido = () => {
-        if (!carritoTotal || carritoTotal.length === 0) return 0;
-        return carritoTotal.reduce((total, detallePedido) => total + detallePedido.cantidad, 0);
+        if (!carrito || carrito.length === 0) return 0;
+        return carrito.reduce((total, detallePedido) => total + detallePedido.cantidad, 0);
     };
 
     const getCantidadTotalPrecio = () => {
-        if (!carritoTotal || carritoTotal.length === 0) return 0;
-        let total:number = 0;
-        carritoTotal.forEach((element: DetallePedido) => {
+        if (!carrito || carrito.length === 0) return 0;
+        let total = 0;
+        carrito.forEach((element: DetallePedido) => {
             total += element.cantidad * element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta;
         });
         return total;
     };
-
-    useEffect(() => {
-        getPedidos();
-    }, []);
 
     function handleVolverClick() {
         navigate('/productos/all');
@@ -87,31 +51,31 @@ export const ListadoPedidoCarrito= () =>{
     
 
     return (
-        <>      
-            <div style={{ padding: "10px", width: "1200px", margin: "auto"}}>
+        <>
+            <div style={{ padding: "10px", width: "1200px", margin: "auto" }}>
                 <h3>Mi Pedido</h3>
                 <Container fluid="sm" className="square border border-dark" id="contenedorPedidosCarrito">
-                    {carritoTotal && carritoTotal.length > 0 ? (
-                        carritoTotal.map((element: DetallePedido) => (
-                        <Row key={element.id}>
-                            <ItemPedidoCarrito
-                                id={element.id}
-                                idProducto={element.articuloManufacturado.id}
-                                nombre={element.articuloManufacturado.denominacion}
-                                rutaImagen={element.articuloManufacturado.imagen.imagenUrl}
-                                precioVenta={element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
-                                cantidad={element.cantidad}
-                                disponible={5}
-                                borrarProducto={borrarCarritoItemPedido}
-                                actualizarCantidad={actualizarCantidadProducto}
+                    {carrito && carrito.length > 0 ? (
+                        carrito.map((element: DetallePedido) => (
+                            <Row key={element.id}>
+                                <ItemPedidoCarrito
+                                    id={element.id}
+                                    idProducto={element.articuloManufacturado.id}
+                                    nombre={element.articuloManufacturado.denominacion}
+                                    rutaImagen={element.articuloManufacturado.imagen.imagenUrl}
+                                    precioVenta={element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
+                                    cantidad={element.cantidad}
+                                    disponible={5}
+                                    borrarProducto={borrarCarritoItemPedido}
+                                    actualizarCantidad={actualizarCantidadProducto}
                                 />
-                        </Row>
+                            </Row>
                         ))
                     ) : (
-                        <p>No hay artículos en el carrito</p>
-                    )}
+                            <p>No hay artículos en el carrito</p>
+                        )}
                 </Container>
-                    
+
                 <div style={{ border: "1px solid black", padding: "20px", margin: "auto", width: "400px" }}>
                     <Row className="justify-content-center">
                         <div>

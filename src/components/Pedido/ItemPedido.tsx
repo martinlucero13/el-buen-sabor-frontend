@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { Pedido } from "../../types/Pedido";
 import { Button, Col, Row } from "react-bootstrap";
 import './ItemPedido.css'

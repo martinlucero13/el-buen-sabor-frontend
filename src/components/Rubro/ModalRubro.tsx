@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
+//Types
 import { Rubro } from "../../types/Rubro";
+
+//Hook
 import { useAlert } from "../../hooks/useAlert";
+
+//Services
 import { findAllParents, saveRubro, updateRubro } from "../../services/RubroService";
 
 type Props = {

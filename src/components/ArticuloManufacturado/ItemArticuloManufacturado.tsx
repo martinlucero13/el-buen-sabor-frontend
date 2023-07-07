@@ -1,6 +1,8 @@
 import { Button } from "react-bootstrap";
-import { ArticuloManufacturado } from "../../types/ArticuloManufacturado";
 import { useNavigate } from 'react-router-dom';
+
+//Types
+import { ArticuloManufacturado } from "../../types/ArticuloManufacturado";
 
 function ItemArticuloManufacturado(props: ArticuloManufacturado): JSX.Element {
 

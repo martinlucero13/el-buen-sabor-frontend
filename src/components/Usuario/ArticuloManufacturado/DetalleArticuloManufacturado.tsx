@@ -2,14 +2,19 @@ import { useEffect, useState, useContext } from 'react';
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import "./ArticuloManufacturado.css";
+
+//Types
 import { ArticuloInsumo } from "../../../types/ArticuloInsumo";
 import { ArticuloManufacturado } from "../../../types/ArticuloManufacturado";
 import { ArticuloManufacturadoInsumo } from "../../../types/ArticuloManufacturadoInsumo";
+
+//Services
 import { findArticuloInsumoById } from "../../../services/ArticuloInsumoService";
 import { findArticuloManufacturadoById } from "../../../services/ArticuloManufacturadoService";
 import { findByArticuloManufacturado } from "../../../services/ArticuloManufacturadoInsumoService";
+
+//Context
 import { CarritoContext } from '../../Context/CarritoContext';
 
 export const DetalleArticuloManufacturado = () => {

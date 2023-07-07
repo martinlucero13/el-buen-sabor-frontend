@@ -1,12 +1,16 @@
-import "./ArticuloManufacturado.css";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Container, Table } from "react-bootstrap";
-
-import { ArticuloManufacturado } from "../../types/ArticuloManufacturado";
-import ItemArticuloManufacturado from "./ItemArticuloManufacturado";
-import { findAllArticuloManufacturados } from "../../services/ArticuloManufacturadoService";
 import { Link } from 'react-router-dom';
+import ItemArticuloManufacturado from "./ItemArticuloManufacturado";
+import "./ArticuloManufacturado.css";
+
+//Types
+import { ArticuloManufacturado } from "../../types/ArticuloManufacturado";
+
+//Services
+import { findAllArticuloManufacturados } from "../../services/ArticuloManufacturadoService";
+
 
 function TableArticuloManufacturado(): JSX.Element {
     const [articulosManufactuados, setArticulosManufacturados] = useState<ArticuloManufacturado[]>([]);

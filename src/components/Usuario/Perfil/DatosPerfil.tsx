@@ -1,13 +1,17 @@
-import { Button, Col, Container, Row } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
-import "./DatosPerfil.css";
-import avatar from "../../../assets/avatar.png";
+import { Button, Col, Container, Row, Form } from 'react-bootstrap';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { findPedidoByCliente } from "../../../services/PedidoService";
-import { Pedido } from '../../../types/Pedido';
 import ItemPedidoCliente from './ItemPedidoCliente';
+import avatar from "../../../assets/avatar.png";
+import "./DatosPerfil.css";
+
+//Services
+import { findPedidoByCliente } from "../../../services/PedidoService";
+
+//Types
+import { Pedido } from '../../../types/Pedido';
+
 
 export const DatosPerfil = () => {
     const { logout } = useAuth0();
@@ -196,7 +200,9 @@ export const DatosPerfil = () => {
                                 pedidos.map((item: Pedido) =>
                                     <Col>
                                         <ItemPedidoCliente
-                                        id={item.id}/>
+                                        id={item.id}
+                                        estado={item.estado}
+                                        />
                                     </Col>
                                 )
                             }

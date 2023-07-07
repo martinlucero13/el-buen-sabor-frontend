@@ -6,12 +6,14 @@ interface CarritoContextType {
   carrito: DetallePedido[];
   agregarAlCarrito: (articulo: ArticuloManufacturado) => void;
   borrarItemPedido: (id: number) => void;
+  actualizarCantidad: (id: number, cantidad: number) => void;
 }
 
 export const CarritoContext = createContext<CarritoContextType>({
   carrito: [],
   agregarAlCarrito: () => {},
   borrarItemPedido: () => {},
+  actualizarCantidad: () => {},
 });
 
 const CarritoProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
@@ -42,8 +44,23 @@ const CarritoProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) =>
     });
   };
 
+  const actualizarCantidad = (id: number, cantidad: number) => {
+    setCarrito((prevCarrito) => {
+      return prevCarrito.map((detallePedido) => {
+        if (detallePedido.articuloManufacturado.id === id) {
+          return {
+            ...detallePedido,
+            cantidad: cantidad,
+          };
+        } else {
+          return detallePedido;
+        }
+      });
+    });
+  };
+
   return (
-    <CarritoContext.Provider value={{ carrito, agregarAlCarrito, borrarItemPedido }}>
+    <CarritoContext.Provider value={{ carrito, agregarAlCarrito, borrarItemPedido, actualizarCantidad  }}>
       {children}
     </CarritoContext.Provider>
   );

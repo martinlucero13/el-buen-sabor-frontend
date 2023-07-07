@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Container, Table } from "react-bootstrap";
-
-import { ArticuloInsumo } from "../../types/ArticuloInsumo";
-import ItemArticuloInsumo from "./ItemArticuloInsumo";
-import { findAllArticuloInsumo } from "../../services/ArticuloInsumoService";
-import { useModal } from "../../hooks/useModal";
 import ModalCrearArticuloInsumo from "./ModalCrearArticuloInsumo";
+import ItemArticuloInsumo from "./ItemArticuloInsumo";
+
+//Types
+import { ArticuloInsumo } from "../../types/ArticuloInsumo";
+
+//Services
+import { findAllArticuloInsumo } from "../../services/ArticuloInsumoService";
+
+//Hook
+import { useModal } from "../../hooks/useModal";
+
 
 function TableArticuloInsumo(): JSX.Element {
     const [articulosInsumos, setArticulosInsumos] = useState<ArticuloInsumo[]>([]);

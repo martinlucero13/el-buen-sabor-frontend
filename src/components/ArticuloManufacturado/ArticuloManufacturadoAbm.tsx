@@ -1,15 +1,25 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useParams, useNavigate } from 'react-router-dom';
-import {ArticuloManufacturado} from "../../types/ArticuloManufacturado";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
+import ModalComprarArticuloInsumo from "../ArticuloInsumo/ModalCrearArticuloInsumo";
+import "./ArticuloManufacturadoAbm.css";
+
+//Services
 import { findAllRubro,findRubroById } from "../../services/RubroService";
 import { findArticuloManufacturadoById, saveArticuloManufacturado, updateArticuloManufacturado } from "../../services/ArticuloManufacturadoService";
+
+//Types
 import { Rubro } from '../../types/Rubro';
+import {ArticuloManufacturado} from "../../types/ArticuloManufacturado";
+
+//Hook
 import { useModal } from "../../hooks/useModal";
-import { useAuth0 } from "@auth0/auth0-react";
-import "./ArticuloManufacturadoAbm.css";
-import ModalComprarArticuloInsumo from "../ArticuloInsumo/ModalCrearArticuloInsumo";
+
+//Util
+import {validateNumericInput} from '../../util/numerosUtil';
+
 
 
 export const ArticuloManufacturadoAbm = () =>{
@@ -235,7 +245,7 @@ export const ArticuloManufacturadoAbm = () =>{
                     <Col></Col>
                     <Col>
                         <label>Precio Venta</label>
-                        <Form.Control id="articulo-manufacturado-abm-input" type="number" name="articuloManufacturadoPrecioVenta" value={articuloManufacturado?.articuloManufacturadoPrecioVenta.precioVenta} onChange={handleInputChangePrecio} />
+                        <Form.Control id="articulo-manufacturado-abm-input" type="number" name="articuloManufacturadoPrecioVenta" value={articuloManufacturado?.articuloManufacturadoPrecioVenta.precioVenta} onChange={handleInputChangePrecio} onKeyDown={validateNumericInput} />
                     </Col>
                 </Row>
                 <Row>

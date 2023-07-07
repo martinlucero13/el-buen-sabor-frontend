@@ -1,8 +1,11 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import './ConfirmarPedido.css'
-import { ChangeEvent, useState } from "react";
-import { DetallePedido } from '../../types/DetallePedido';
 import { useLocation ,useNavigate } from 'react-router-dom';
+import { ChangeEvent, useState } from "react";
+import './ConfirmarPedido.css'
+
+//Types
+import { DetallePedido } from '../../types/DetallePedido';
+
 
 export const ConfirmarPedido = () => {
 
