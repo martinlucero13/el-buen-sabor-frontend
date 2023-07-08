@@ -5,7 +5,7 @@ import { useModal } from '../../hooks/useModal';
 import ModalDetallePedidoConfirmado from './ModalDetallePedidoConfirmado';
 
 
-function ItemPedido(props: Pedido): JSX.Element {
+function ItemPedidoDelivery(props: Pedido): JSX.Element {
 
     const { showModal, handleClose } = useModal();
     var estadoPago = "";
@@ -14,6 +14,7 @@ function ItemPedido(props: Pedido): JSX.Element {
     }else{
         estadoPago = "NO"
     }
+    
     return(
         <>
             <Row id="tabla-cuerpo">
@@ -27,14 +28,19 @@ function ItemPedido(props: Pedido): JSX.Element {
                 </Col>
 
                 <Col className="col-pedido">
-                    { props.tipoEntregaPedido?.descripcion }
+                    { props.cliente?.nombre + "\t" }
+                    { props.cliente?.apellido }
                 </Col>
 
                 <Col className="col-pedido">
-                    { props.tipoPagoPedido?.descripcion }
+                    { props.cliente?.domicilio.calle +"\t" }
+                    { props.cliente?.domicilio.numero }
                 </Col>
                 <Col className="col-pedido">
-                    {estadoPago}
+                    {props.cliente?.domicilio?.localidad?.nombre}
+                </Col>
+                <Col className="col-pedido">
+                    {props.cliente?.telefono}
                 </Col>
                 <Col className="col-pedido">
                     {props.estado}
@@ -53,4 +59,4 @@ function ItemPedido(props: Pedido): JSX.Element {
     );
 }
 
-export default ItemPedido;
+export default ItemPedidoDelivery;
