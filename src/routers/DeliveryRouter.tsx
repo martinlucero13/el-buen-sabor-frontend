@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import NavBarEmpleado from "../components/Layout/NavBar/NavBarEmpleado";
-import ListadoPedidoDelivery from "../components/Pedido/ListadoPedidoDelivery";
+import ListadoPedidoDelivery from "../components/Pedido/Delivery/ListadoPedidoDelivery";
 
 function DeliveryRouter(): JSX.Element {
     return(
