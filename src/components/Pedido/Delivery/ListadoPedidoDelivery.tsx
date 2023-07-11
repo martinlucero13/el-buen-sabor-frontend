@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
-import './ListadoPedido.css';
-import { Pedido } from "../../types/Pedido";
+import '../ListadoPedido.css';
+import { Pedido } from "../../../types/Pedido";
 import { useAuth0 } from "@auth0/auth0-react";
-import { findAllPedidos } from "../../services/PedidoService";
 import ItemPedidoDelivery from "./ItemPedidoDelivery";
+
+//Service
+import { cambiarEstado, findPedidoByEstado } from "../../../services/PedidoService";
+
 
 const ListadoPedidoDelivery: React.FC = () => {
 
@@ -12,12 +15,26 @@ const ListadoPedidoDelivery: React.FC = () => {
   const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-      getAllPedidos();
+    getAllPedidosDelivery();
   }, []);
 
-  const getAllPedidos = async () => {
+  const actualizarEstadoPedido = async (id:number,pedido: Pedido) => {
+    try {
       const token = await getAccessTokenSilently();
-      const newPedidos = await findAllPedidos(token);
+
+      const pedidoActualizado = await cambiarEstado(id, pedido,token);
+      setPedidos((prevPedidos) => prevPedidos.filter((p) => p.id !== pedidoActualizado.id));
+
+
+    } catch (error) {
+      console.error('Error al actualizar el pedido:', error);
+    }
+
+  }
+
+  const getAllPedidosDelivery = async () => {
+      const token = await getAccessTokenSilently();
+      const newPedidos = await findPedidoByEstado("Delivery",token);
       setPedidos(newPedidos);
   };
 
@@ -42,13 +59,9 @@ const ListadoPedidoDelivery: React.FC = () => {
               <Col>Detalle</Col>
             </Row>
             {
-              pedidos.map((item: Pedido, index: number) => {
-                if (item.tipoEntregaPedido?.descripcion === "Delivery") {
-                  return <ItemPedidoDelivery key={index} {...item} />;
-                } else {
-                  return null;
-                }
-              })
+              pedidos.map((pedido: Pedido, index: number) => (
+                <ItemPedidoDelivery key={index} pedido={pedido} cambiarEstado={actualizarEstadoPedido}/>
+              ))
             }
         </Table>
       </Container>

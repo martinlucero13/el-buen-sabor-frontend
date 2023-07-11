@@ -3,18 +3,22 @@ import { Pedido } from "../../types/Pedido";
 import { ItemDetallePedido} from "./ItemDetallePedido";
 import { DetallePedido } from '../../types/DetallePedido';
 import { useEffect, useState } from 'react';
-import { findByPedidoId } from "../../services/DetallePedidoService";
 import { useAuth0 } from '@auth0/auth0-react';
-import { ItemDetallePedidoCocinero } from './Cocinero/ItemDetallePedidoCocinero';
+
+//Service
+import { findByPedidoId } from "../../services/DetallePedidoService";
+
+//Util
+import {formatearFecha} from "../../util/dateUtil";
+
 
 type Props = {
     showModal: boolean,
     handleClose: () => void,
-    pedido: Pedido,
-    receta: boolean
+    pedido: Pedido
 }
 
-export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido, receta }: Props)=>{
+export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido }: Props)=>{
 
     const [detallesPedido, setDetallePedido] = useState<DetallePedido[]>([]);
     const { getAccessTokenSilently } = useAuth0();
@@ -33,8 +37,6 @@ export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido, rec
         detallesPedido.forEach((element) => {
             aux += element.subTotal;
         });
-
-
         return(aux);
     };
       
@@ -53,7 +55,7 @@ export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido, rec
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col><p className="col-titulo-p">Fecha: {pedido.horaEstimadaFin}</p></Col>
+                            <Col><p className="col-titulo-p">Fecha: {formatearFecha(pedido.fecha)}</p></Col>
                 
                             <Col><p className="col-titulo-p">Subtotal: $ {getSubTotal()}</p></Col>
                         </Row>
@@ -73,20 +75,14 @@ export const ModalDetallePedidoConfirmado=({ showModal, handleClose, pedido, rec
 
                         {detallesPedido.map((element: DetallePedido) =>
                             <Row key={element.id}>
-                                {!receta ? (
-                                    <ItemDetallePedido
-                                        nombre={element.articuloManufacturado.denominacion}
-                                        precioVenta={element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
-                                        cantidad={element.cantidad}
-                                        subtotal={element.subTotal}
-                                    />
-                                ): (
-                                    <ItemDetallePedidoCocinero
-                                        denominacion={element.articuloManufacturado.denominacion}
-                                        cantidad={element.cantidad}
-                                        idArticulo={element.articuloManufacturado.id}
-                                    />
-                                )}
+ 
+                                <ItemDetallePedido
+                                    nombre={element.articuloManufacturado.denominacion}
+                                    precioVenta={element.articuloManufacturado.articuloManufacturadoPrecioVenta.precioVenta}
+                                    cantidad={element.cantidad}
+                                    subtotal={element.subTotal}
+                                />
+
                             </Row>
                         )}
                     </Modal.Body>

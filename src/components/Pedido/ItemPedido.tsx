@@ -4,6 +4,8 @@ import './ItemPedido.css'
 import { useModal } from '../../hooks/useModal';
 import ModalDetallePedidoConfirmado from './ModalDetallePedidoConfirmado';
 
+//Util
+import {formatearFecha} from "../../util/dateUtil";
 
 function ItemPedido(props: Pedido): JSX.Element {
 
@@ -16,14 +18,13 @@ function ItemPedido(props: Pedido): JSX.Element {
     }
     return(
         <>
-            <Row id="tabla-cuerpo">
+            <Row className="tabla-cuerpo">
                 <Col className="col-pedido">
                     { props.id }
                 </Col>
 
                 <Col className="col-pedido">
-                    {props.fecha + "\t"} 
-                    {props.horaEstimadaFin}
+                    {formatearFecha(props.fecha)}
                 </Col>
 
                 <Col className="col-pedido">
@@ -47,7 +48,6 @@ function ItemPedido(props: Pedido): JSX.Element {
                 showModal={showModal}
                 handleClose={handleClose}
                 pedido={props}
-                receta={false}
             />
         </>
     );

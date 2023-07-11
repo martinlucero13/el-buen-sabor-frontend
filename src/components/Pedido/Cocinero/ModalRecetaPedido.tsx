@@ -3,7 +3,11 @@ import { Col, Modal, Row  } from "react-bootstrap";
 import { ArticuloInsumo } from '../../../types/ArticuloInsumo';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from "react";
+
+//Types
 import { ArticuloManufacturado } from '../../../types/ArticuloManufacturado';
+
+//Service
 import { findArticuloInsumoById } from "../../../services/ArticuloInsumoService";
 import { findArticuloManufacturadoWithReceta } from "../../../services/ArticuloManufacturadoService";
 import { findByArticuloManufacturado } from "../../../services/ArticuloManufacturadoInsumoService";

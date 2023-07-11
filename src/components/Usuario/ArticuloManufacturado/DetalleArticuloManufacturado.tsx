@@ -7,7 +7,6 @@ import "./ArticuloManufacturado.css";
 //Types
 import { ArticuloInsumo } from "../../../types/ArticuloInsumo";
 import { ArticuloManufacturado } from "../../../types/ArticuloManufacturado";
-import { ArticuloManufacturadoInsumo } from "../../../types/ArticuloManufacturadoInsumo";
 
 //Services
 import { findArticuloInsumoById } from "../../../services/ArticuloInsumoService";
@@ -21,7 +20,6 @@ export const DetalleArticuloManufacturado = () => {
     const { id } = useParams();
     const [articuloManufacturado, setArticuloManufacturado] = useState<ArticuloManufacturado>();
     const [articulosInsumos, setArticulosInsumos] = useState<ArticuloInsumo[]>([]);
-    const [articulosManufacturadosInsumos, setArticulosManufacturadosInsumos] = useState<ArticuloManufacturadoInsumo[]>([]);
     const { getAccessTokenSilently } = useAuth0();
     const { agregarAlCarrito } = useContext(CarritoContext);
 
@@ -48,7 +46,6 @@ export const DetalleArticuloManufacturado = () => {
         };
 
         setArticuloManufacturado(newArticuloManufacturado);
-        setArticulosManufacturadosInsumos(newArticulosManufacturadosInsumos);
         setArticulosInsumos(articulosInsumosArray);
     };
 
@@ -71,11 +68,11 @@ export const DetalleArticuloManufacturado = () => {
                         </Col>
 
                         <Col>
-                            <h2>
+                            <h1>
                                 <strong>
                                     ${articuloManufacturado?.articuloManufacturadoPrecioVenta.precioVenta} 
                                 </strong>
-                            </h2>
+                            </h1>
                         </Col>
                     </Row>
                     <Row>

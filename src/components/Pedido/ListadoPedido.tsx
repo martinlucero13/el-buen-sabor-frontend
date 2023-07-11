@@ -70,31 +70,49 @@ const ListadoPedido: React.FC = () => {
               id="filter-dropdown"
               title={selectedOption || 'Filtrar por estado'}
             >
-
               <Dropdown.Item
-                eventKey="Cocina"
+                eventKey=""
                 onClick={() => handleSelect("")}
               >
                 Todos
               </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="Cocina"
-                onClick={() => handleSelect("Cocina")}
-              >
-                Cocina
-              </Dropdown.Item>
+
               <Dropdown.Item
                 eventKey="A Confirmar"
                 onClick={() => handleSelect("A Confirmar")}
               >
                 A Confirmar
               </Dropdown.Item>
+
+              <Dropdown.Item
+                eventKey="Cocina"
+                onClick={() => handleSelect("Cocina")}
+              >
+                Cocina
+              </Dropdown.Item>
+
               <Dropdown.Item
                 eventKey="Listo"
                 onClick={() => handleSelect("Listo")}
               >
                 Listo
               </Dropdown.Item>
+
+              <Dropdown.Item
+                eventKey="Delivery"
+                onClick={() => handleSelect("Delivery")}
+              >
+                Delivery
+              </Dropdown.Item>
+
+              
+              <Dropdown.Item
+                eventKey="Terminado"
+                onClick={() => handleSelect("Terminado")}
+              >
+                Terminado
+              </Dropdown.Item>
+
             </DropdownButton>
           </Col>
           <Col>

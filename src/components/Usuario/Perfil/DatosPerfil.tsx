@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemPedidoCliente from './ItemPedidoCliente';
-import avatar from "../../../assets/avatar.png";
 import "./DatosPerfil.css";
 
 //Services
@@ -14,7 +13,7 @@ import { Pedido } from '../../../types/Pedido';
 
 
 export const DatosPerfil = () => {
-    const { logout } = useAuth0();
+    const { user,logout } = useAuth0();
     const { filtro } = useParams();
     const [showPersonalData, setShowPersonalData] = useState(filtro === 'datos');
     const [pedidos, setPedidoCliente] = useState<Pedido[]>([]);
@@ -59,8 +58,8 @@ export const DatosPerfil = () => {
                 <div className="orange-rectangle">
                     <div className="orange-rectangle-inner">
                     <div className="div-foto">
-                        <a><img src={avatar} width="320px" alt="avatar" /></a>
-                        <div>Nombre Usuario</div>
+                        <a><img src={user?.picture} width="320px" alt="avatar" /></a>
+                        <div>{user?.name}</div>
                     </div>
                     <Button className={`rectangle-datos ${showPersonalData ? 'rectangle-disabled' : ''}`} disabled={showPersonalData} onClick={handleToggleContent}>Mis datos Personales</Button>
                     <Button className={`rectangle-pedidos  ${!showPersonalData ? 'rectangle-disabled' : ''}`} disabled={!showPersonalData} onClick={handleToggleContent}>Mis Pedidos</Button>
