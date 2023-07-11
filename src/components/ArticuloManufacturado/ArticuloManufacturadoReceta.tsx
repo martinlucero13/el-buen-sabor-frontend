@@ -14,10 +14,9 @@ import { ArticuloManufacturadoInsumo } from '../../types/ArticuloManufacturadoIn
 import { Receta } from '../../types/Receta';
 
 //Services
-import { findArticuloManufacturadoById } from "../../services/ArticuloManufacturadoService";
 import { findArticuloInsumoById, findAllArticuloInsumo } from "../../services/ArticuloInsumoService";
 import { findByArticuloManufacturadoId, saveReceta, updateReceta } from "../../services/RecetaService";
-import { deleteArticuloManufacturadoInsumo, findByArticuloManufacturado, saveArticuloManufacturadoInsumo, updateArticuloManufacturadoInsumo } from "../../services/ArticuloManufacturadoInsumoService";
+import { deleteArticuloManufacturadoInsumo, findByArticuloManufacturado, findArticuloManufacturadoInsumoById, saveArticuloManufacturadoInsumo, updateArticuloManufacturadoInsumo } from "../../services/ArticuloManufacturadoInsumoService";
 
 
 
@@ -47,8 +46,6 @@ export const ArticuloManufacturadoReceta = () =>{
         const token = await getAccessTokenSilently();
       
         const recetaNueva = await findByArticuloManufacturadoId(Number(idArticuloManufacturado), token);
-        const articuloManufacturado = await findArticuloManufacturadoById(Number(idArticuloManufacturado), token);
-        recetaNueva.articuloManufacturado = articuloManufacturado;
         setReceta(recetaNueva);
     
     };
@@ -91,7 +88,6 @@ export const ArticuloManufacturadoReceta = () =>{
     //Para poder modificar al procedimiento de la receta
     const handleModificar= async() => {
         
-        //const proceso = (document.getElementsByName('procedimiento')[0] as HTMLTextAreaElement).value;
         if(!receta?.descripcion|| articulosManufacturadosInsumos.length==0){
             alert("Minimo 1 ingrediente y debe existir el Procedimiento");
             return;
@@ -104,28 +100,47 @@ export const ArticuloManufacturadoReceta = () =>{
                 //alert(element.cantidad);
                 //alert(element.articuloInsumoId);
                 //alert(element.articuloManufacturadoId);
-
+                
                 if(element.id===0){
                     alert("save");
                     await saveArticuloManufacturadoInsumo(element, token);
                 }
                 else{
-                    alert("update");
-                    await updateArticuloManufacturadoInsumo(element.id,element, token);
+
+                    const existingArticuloManufacturadoInsumo = await findArticuloManufacturadoInsumoById(
+                        element.id,
+                        token
+                    );
+
+                    if (
+                        element.cantidad !== existingArticuloManufacturadoInsumo.cantidad
+                    ) {
+                        // Al menos un campo ha cambiado, realizar la actualización del ArticuloManufacturadoInsumo
+                        alert("update manufacturado insumo");
+                        await updateArticuloManufacturadoInsumo(element.id, element, token);
+                     }
                 }
             })    
+
+            
             if(receta?.id===0){
                 alert("save receta");
                 
                 await saveReceta(receta, token);
             }
             else if (receta?.id) {
-                alert("Actualizar receta");
-                await updateReceta(receta.id, receta, token);
+
+                const existingReceta = await findByArticuloManufacturadoId(
+                    Number(idArticuloManufacturado),
+                    token
+                );
+
+                if (receta?.descripcion !== existingReceta.descripcion) {
+                    alert("Actualizar receta");
+                    await updateReceta(receta.id, receta, token);
+                }
             }
 
-
-            handleCancelar();
         }     
     }
 
@@ -193,7 +208,7 @@ export const ArticuloManufacturadoReceta = () =>{
           const updatedArticulosManufacturadosInsumos = articulosManufacturadosInsumos.filter(element => element.articuloInsumoId !== idInsumo);
           setArticulosManufacturadosInsumos(updatedArticulosManufacturadosInsumos);
         }
-      }
+    }
 
       
       
