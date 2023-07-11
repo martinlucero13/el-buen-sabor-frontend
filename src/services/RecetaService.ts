@@ -1,5 +1,4 @@
 import { Receta } from '../types/Receta';
-import { URL_API_BASE } from "../constants";
 import { GenericService } from './GenericService';
 
 export async function findByArticuloManufacturadoId(id: number, token: string): Promise<Receta> {
