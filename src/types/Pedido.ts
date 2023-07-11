@@ -5,7 +5,7 @@ import { TipoPagoPedido } from "./TipoPagoPedido";
 
 export interface Pedido extends GenericTypes{
 
-    fecha: string;
+    fecha: Date;
     horaEstimadaFin: string;
     montoDescuento: number;
     pagado: boolean;
