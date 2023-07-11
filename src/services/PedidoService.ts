@@ -29,6 +29,14 @@ export async function updatePedido(id: number, pedido: Pedido, token: string) {
   return GenericService<Pedido>(`pedidos/${id}`, "PUT", token, pedido);
 }
 
+export async function sumarMinutosPedido(id: number, pedido: Pedido, token: string) {
+  return GenericService<Pedido>(`pedidos/minuto/${id}`, "PUT", token, pedido);
+}
+
+export async function cambiarEstado(id: number, pedido: Pedido, token: string) {
+  return GenericService<Pedido>(`pedidos/estado/${id}`, "PUT", token, pedido);
+}
+
 export async function deletePedido(id: number, token: string) {
   return GenericService<void>(`pedidos/${id}`, "DELETE", token);
 }
