@@ -81,7 +81,7 @@ const ItemPedidoCarrito = (props: ProductoParams) => {
                         <Button variant="outline-dark" onClick={decrementarCantidad}>-</Button>
                         <Button variant="outline-dark" disabled> {cantidad} </Button>
                         <Button variant="outline-dark" onClick={incrementarCantidad}>+</Button>
-                        <div>Disponible: {cantidadDisponible}</div>
+                        <div>Disponible: {String(cantidadDisponible)}</div>
                     </Card.Text>
                     <Card.Text>${props.precioVenta * cantidad}</Card.Text>
                     <Button id="boton-item-receta-ingrediente" onClick={borrarItemPedido}>

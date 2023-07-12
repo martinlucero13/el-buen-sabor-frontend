@@ -113,8 +113,8 @@ export const DetallePedidoSN=()=>{
     return(
         <>
             
-            <div id="detallePedido-div">
-                <Container fluid="sm" className="square border border-dark">
+            <div>
+                <Container fluid="sm" className="square border border-dark"  id="detallePedido-div">
                     <h1>Pedido {pedido.confirmado? pedido.numero: "S/N"}</h1>
                     <Row>
                         <Col><p className="col-titulo-p">Fecha: {pedido.confirmado? pedido.fecha:"-"}</p></Col>
