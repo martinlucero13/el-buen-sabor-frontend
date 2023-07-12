@@ -95,14 +95,12 @@ export const ArticuloManufacturadoReceta = () =>{
         else{
 
             const token = await getAccessTokenSilently();
-
+            let cambios = false;
             articulosManufacturadosInsumos.map(async (element) => {
-                //alert(element.cantidad);
-                //alert(element.articuloInsumoId);
-                //alert(element.articuloManufacturadoId);
                 
                 if(element.id===0){
                     alert("save");
+                    cambios=true;
                     await saveArticuloManufacturadoInsumo(element, token);
                 }
                 else{
@@ -115,8 +113,8 @@ export const ArticuloManufacturadoReceta = () =>{
                     if (
                         element.cantidad !== existingArticuloManufacturadoInsumo.cantidad
                     ) {
-                        // Al menos un campo ha cambiado, realizar la actualización del ArticuloManufacturadoInsumo
-                        alert("update manufacturado insumo");
+                        cambios=true;
+                        alert("update");
                         await updateArticuloManufacturadoInsumo(element.id, element, token);
                      }
                 }
@@ -125,7 +123,7 @@ export const ArticuloManufacturadoReceta = () =>{
             
             if(receta?.id===0){
                 alert("save receta");
-                
+                cambios=true;
                 await saveReceta(receta, token);
             }
             else if (receta?.id) {
@@ -137,8 +135,20 @@ export const ArticuloManufacturadoReceta = () =>{
 
                 if (receta?.descripcion !== existingReceta.descripcion) {
                     alert("Actualizar receta");
+                    cambios=true;
                     await updateReceta(receta.id, receta, token);
                 }
+            }
+
+            alert("Se realizaron cambios ? "+cambios);
+            if(cambios){
+                
+                const confirmarSeguirEditando = window.confirm("¿Desea seguir editando la receta?");
+                if (!confirmarSeguirEditando) {
+                    handleCancelar();
+                }
+
+
             }
 
         }     
@@ -269,7 +279,7 @@ export const ArticuloManufacturadoReceta = () =>{
                 )}
                 <div className="d-flex justify-content-center">
                     <Button variant="dark" id="button" onClick={handleCancelar}>
-                        Cancelar
+                        Volver
                     </Button>
                     <Button variant="dark" id="button" onClick={handleModificar}>
                         Modificar Cambios
