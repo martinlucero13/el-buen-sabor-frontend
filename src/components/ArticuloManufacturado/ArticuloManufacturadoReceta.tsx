@@ -64,8 +64,6 @@ export const ArticuloManufacturadoReceta = () =>{
     }, []);
 
     
-
-    
     const handleCancelar= () => {
         let modifiedPath = currentPath.replace(`/abm/receta/${idArticuloManufacturado}`, `/abm/${idArticuloManufacturado}`);
         navigate(modifiedPath);
@@ -86,73 +84,52 @@ export const ArticuloManufacturadoReceta = () =>{
     };
 
     //Para poder modificar al procedimiento de la receta
-    const handleModificar= async() => {
-        
-        if(!receta?.descripcion|| articulosManufacturadosInsumos.length==0){
-            alert("Minimo 1 ingrediente y debe existir el Procedimiento");
-            return;
+    const handleModificar = async () => {
+        if (!receta?.descripcion || articulosManufacturadosInsumos.length === 0) {
+          alert("Mínimo 1 ingrediente y debe existir el procedimiento");
+          return;
+        } else {
+          const token = await getAccessTokenSilently();
+          let cambios = false;
+      
+          for (const element of articulosManufacturadosInsumos) {
+            if (element.id === 0) {
+              alert("save");
+              cambios = true;
+              await saveArticuloManufacturadoInsumo(element, token);
+            } else {
+              const existingArticuloManufacturadoInsumo = await findArticuloManufacturadoInsumoById(
+                element.id,
+                token
+              );
+      
+              if (element.cantidad !== existingArticuloManufacturadoInsumo.cantidad) {
+                alert("update");
+                cambios = true;
+                await updateArticuloManufacturadoInsumo(element.id, element, token);
+              }
+            }
+          }
+
+          if (receta?.id === 0) {
+            alert("save receta");
+            cambios = true;
+            await saveReceta(receta, token);
+          } else if (receta?.id) {
+
+            const existingReceta = await findByArticuloManufacturadoId(Number(idArticuloManufacturado), token);
+      
+            if (receta?.descripcion !== existingReceta.descripcion) {
+              alert("Actualizar receta");
+              cambios = true;
+              await updateReceta(receta.id, receta, token);
+            }
+          }
+          if (cambios) {
+            handleCancelar();
+          }
         }
-        else{
-
-            const token = await getAccessTokenSilently();
-            let cambios = false;
-            articulosManufacturadosInsumos.map(async (element) => {
-                
-                if(element.id===0){
-                    alert("save");
-                    cambios=true;
-                    await saveArticuloManufacturadoInsumo(element, token);
-                }
-                else{
-
-                    const existingArticuloManufacturadoInsumo = await findArticuloManufacturadoInsumoById(
-                        element.id,
-                        token
-                    );
-
-                    if (
-                        element.cantidad !== existingArticuloManufacturadoInsumo.cantidad
-                    ) {
-                        cambios=true;
-                        alert("update");
-                        await updateArticuloManufacturadoInsumo(element.id, element, token);
-                     }
-                }
-            })    
-
-            
-            if(receta?.id===0){
-                alert("save receta");
-                cambios=true;
-                await saveReceta(receta, token);
-            }
-            else if (receta?.id) {
-
-                const existingReceta = await findByArticuloManufacturadoId(
-                    Number(idArticuloManufacturado),
-                    token
-                );
-
-                if (receta?.descripcion !== existingReceta.descripcion) {
-                    alert("Actualizar receta");
-                    cambios=true;
-                    await updateReceta(receta.id, receta, token);
-                }
-            }
-
-            alert("Se realizaron cambios ? "+cambios);
-            if(cambios){
-                
-                const confirmarSeguirEditando = window.confirm("¿Desea seguir editando la receta?");
-                if (!confirmarSeguirEditando) {
-                    handleCancelar();
-                }
-
-
-            }
-
-        }     
-    }
+    };
 
     const handleDescripcionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = event.target;
