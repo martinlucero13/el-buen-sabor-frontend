@@ -13,7 +13,7 @@ import {formatearFecha,sumarFechas} from "../../../util/dateUtil";
 type ProductoParams = {
     pedido: Pedido;
     actualizarPedido: (id: number, pedidoActualizado:Pedido) => void;
-    cambiarEstado: (id: number, pedidoActualizado:Pedido) => void;
+    cambiarEstado: (id: number) => void;
 }
 
 function ItemPedidoCocinero({ pedido, actualizarPedido, cambiarEstado }: ProductoParams): JSX.Element {
@@ -33,8 +33,7 @@ function ItemPedidoCocinero({ pedido, actualizarPedido, cambiarEstado }: Product
 
         const confirmarSeguirEditando = window.confirm("¿Pedido Listo?");
         if (confirmarSeguirEditando) {
-            pedido.estado="Listo";
-            cambiarEstado(pedido.id , pedido);
+            cambiarEstado(pedido.id);
         }
     };
 

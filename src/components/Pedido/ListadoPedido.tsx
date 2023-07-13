@@ -3,8 +3,11 @@ import { Button, Col, Container, Dropdown, DropdownButton, Form, FormControl, Ro
 import './ListadoPedido.css';
 import { Pedido } from "../../types/Pedido";
 import { useAuth0 } from "@auth0/auth0-react";
-import { findAllPedidos, findPedidoByTermino, findPedidoByEstado } from "../../services/PedidoService";
 import ItemPedido from "./ItemPedido";
+
+//Services
+import { findAllPedidos, findPedidoByTermino, findPedidoByEstado } from "../../services/PedidoService";
+import { cambiarEstado } from "../../services/PedidoService";
 
 const ListadoPedido: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,6 +35,13 @@ const ListadoPedido: React.FC = () => {
   const handleSelect = (option: string) => {
     setSelectedOption(option);
     handleFilter(option);
+  };
+
+  const handleEstadoChange = async (id:number, estado:string) => {
+    const token = await getAccessTokenSilently();
+    await cambiarEstado(id, estado, token);
+
+    getAllPedidos();
   };
 
   const handleFilter = async (option: string) => {
@@ -145,7 +155,7 @@ const ListadoPedido: React.FC = () => {
             </Row>
             {
               pedidos.map((item: Pedido, index: number) =>
-                  <ItemPedido key={index} {...item} />
+                <ItemPedido key={index} pedido={item} onEstadoChangeItem={handleEstadoChange} />        
               )
             }
         </Table>
