@@ -27,15 +27,15 @@ function ItemUsuario(props: Cliente): JSX.Element {
                     { props.telefono }
                 </td>
                 <td>
-                    { props.usuario.usuario }
+                    { props.usuario?.usuario }
                 </td>
                 <td>
-                    { props.domicilio.calle }
+                    { props.domicilio?.calle }
                     &nbsp;
-                    { props.domicilio.numero }
+                    { props.domicilio?.numero }
                 </td>
                 <td>
-                    { props.domicilio.localidad.nombre }
+                    { props.domicilio?.localidad?.nombre }
                 </td>
                 <td>
                     <Button onClick={() => handleClose()} variant="warning">
