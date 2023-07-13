@@ -9,23 +9,28 @@ import { DetallePedido } from '../../types/DetallePedido';
 
 export const ConfirmarPedido = () => {
 
-    const [formaEntrega, setFormaEntrega] = useState(""); // Estado para almacenar la forma de entrega seleccionada
-    const [formaPago, setFormaPago] = useState("");
+    const [pedido, setPedido] = useState({
+        formaEntrega: "", // Estado para almacenar la forma de entrega seleccionada
+        formaPago: "" // Estado para almacenar la forma de pago seleccionada
+    });
     const navigate = useNavigate();
     const location = useLocation();
     const carrito: DetallePedido[] = location.state;
 
     const handleChangeFormaEntrega = (event: ChangeEvent<HTMLInputElement>) => {
         const formaEntrega = event.target.value;
-        setFormaEntrega(formaEntrega); // Actualizar el estado cuando se cambie la forma de entrega
+        let formaPago = "";
       
-        if (formaEntrega === "Domicilio" || formaEntrega === "Retiro Local") {
-          setFormaPago("Mercado Pago"); // Establecer automáticamente la forma de pago a "Mercado Pago" si la forma de entrega es "Recibir en Domicilio" o "Retiro Local"
-        } else {
-          setFormaPago(""); // Restablecer la forma de pago a vacío si la forma de entrega es distinta a "Recibir en Domicilio" o "Retiro Local"
+        if (formaEntrega === "Domicilio" && pedido.formaPago !== "Efectivo") {
+          formaPago = "Mercado Pago";
         }
+      
+        setPedido((prevPedido) => ({
+          ...prevPedido,
+          formaEntrega,
+          formaPago
+        })); // Actualizar el estado cuando se cambie la forma de entrega
     };
-
     const getCantidadTotalPrecio = () => {
         if (!carrito || carrito.length === 0) return 0;
         let total:number = 0;
@@ -40,17 +45,17 @@ export const ConfirmarPedido = () => {
     }
 
     function handleSiguienteClick() {
-        if(formaEntrega&&formaPago){
+        if(pedido.formaEntrega&&pedido.formaPago){
 
-            const pedido = {
+            const pedidoNuevo = {
                 detallePedido: carrito, // Aquí debes proporcionar el valor correcto para carrito
-                tipoEntrega: formaEntrega,
-                tipoPago: formaPago,
+                tipoEntrega: pedido.formaEntrega,
+                tipoPago: pedido.formaPago,
                 descuento: descuento,
                 subtotal: subtotal,
                 confirmado: false
             };
-            navigate('detallePedido', { state: pedido});
+            navigate('detallePedido', { state: pedidoNuevo});
         }
         else{
             alert("Completa el formulario")
@@ -58,14 +63,18 @@ export const ConfirmarPedido = () => {
     }
     
     const handleChangeFormaPago = (event: ChangeEvent<HTMLInputElement>) => {
-        setFormaPago(event.target.value); // Actualizar el estado cuando se cambie la forma de pago
+        const formaPago = event.target.value;
+        setPedido((prevPedido) => ({
+          ...prevPedido,
+          formaPago
+        })); // Actualizar el estado cuando se cambie la forma de pago
     };
 
     var descuento:number = 0;
     var subtotal:number = getCantidadTotalPrecio();
     var total:number = 0;
 
-    if(formaEntrega === "Retiro Local"){
+    if(pedido.formaEntrega === "Retiro Local"){
         descuento = subtotal*0.10;
         total = subtotal - descuento;
     }else{
@@ -115,7 +124,7 @@ export const ConfirmarPedido = () => {
                         name="forma-pago"
                         label="Efectivo"
                         value="Efectivo"
-                        disabled={formaEntrega === "Domicilio"}
+                        disabled={pedido.formaEntrega === "Domicilio" || pedido.formaEntrega ===""}
                         onChange={handleChangeFormaPago} // Manejar el cambio de forma de pago
                         />
                     </div>
@@ -126,7 +135,7 @@ export const ConfirmarPedido = () => {
                         name="forma-pago"
                         label="Mercado Pago"
                         value="Mercado Pago"
-                        checked={formaEntrega === "Domicilio" || formaEntrega === "Retiro Local"} // Marcar automáticamente si la forma de entrega es "Recibir en Domicilio" o "Retiro Local"
+                        disabled={pedido.formaEntrega ===""}
                         onChange={handleChangeFormaPago} // Manejar el cambio de forma de pago
                         />
                     </div>

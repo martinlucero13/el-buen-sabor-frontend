@@ -10,7 +10,7 @@ import {formatearFecha} from "../../../util/dateUtil";
 
 type ProductoParams = {
     pedido: Pedido;
-    cambiarEstado: (id: number, pedidoActualizado:Pedido) => void;
+    cambiarEstado: (id: number) => void;
 }
 function ItemPedidoDelivery({ pedido, cambiarEstado }: ProductoParams): JSX.Element {
 
@@ -20,8 +20,7 @@ function ItemPedidoDelivery({ pedido, cambiarEstado }: ProductoParams): JSX.Elem
         if(pedido.estado!=="Terminado"){
             const confirmarSeguirEditando = window.confirm("¿Pedido Entregado?");
             if (confirmarSeguirEditando) {
-                pedido.estado="Terminado";
-                cambiarEstado(pedido.id , pedido);
+                cambiarEstado(pedido.id);
             }
         }
     };

@@ -10,3 +10,7 @@
 #modal-receta-pedido-header, #modal-receta-pedido-body{
     background-color: #FF9E00;
 }
+
+#detallePedido-div{
+    background-color: white;
+}

@@ -64,8 +64,6 @@ export const ArticuloManufacturadoReceta = () =>{
     }, []);
 
     
-
-    
     const handleCancelar= () => {
         let modifiedPath = currentPath.replace(`/abm/receta/${idArticuloManufacturado}`, `/abm/${idArticuloManufacturado}`);
         navigate(modifiedPath);
@@ -86,63 +84,52 @@ export const ArticuloManufacturadoReceta = () =>{
     };
 
     //Para poder modificar al procedimiento de la receta
-    const handleModificar= async() => {
-        
-        if(!receta?.descripcion|| articulosManufacturadosInsumos.length==0){
-            alert("Minimo 1 ingrediente y debe existir el Procedimiento");
-            return;
+    const handleModificar = async () => {
+        if (!receta?.descripcion || articulosManufacturadosInsumos.length === 0) {
+          alert("Mínimo 1 ingrediente y debe existir el procedimiento");
+          return;
+        } else {
+          const token = await getAccessTokenSilently();
+          let cambios = false;
+      
+          for (const element of articulosManufacturadosInsumos) {
+            if (element.id === 0) {
+              alert("save");
+              cambios = true;
+              await saveArticuloManufacturadoInsumo(element, token);
+            } else {
+              const existingArticuloManufacturadoInsumo = await findArticuloManufacturadoInsumoById(
+                element.id,
+                token
+              );
+      
+              if (element.cantidad !== existingArticuloManufacturadoInsumo.cantidad) {
+                alert("update");
+                cambios = true;
+                await updateArticuloManufacturadoInsumo(element.id, element, token);
+              }
+            }
+          }
+
+          if (receta?.id === 0) {
+            alert("save receta");
+            cambios = true;
+            await saveReceta(receta, token);
+          } else if (receta?.id) {
+
+            const existingReceta = await findByArticuloManufacturadoId(Number(idArticuloManufacturado), token);
+      
+            if (receta?.descripcion !== existingReceta.descripcion) {
+              alert("Actualizar receta");
+              cambios = true;
+              await updateReceta(receta.id, receta, token);
+            }
+          }
+          if (cambios) {
+            handleCancelar();
+          }
         }
-        else{
-
-            const token = await getAccessTokenSilently();
-
-            articulosManufacturadosInsumos.map(async (element) => {
-                //alert(element.cantidad);
-                //alert(element.articuloInsumoId);
-                //alert(element.articuloManufacturadoId);
-                
-                if(element.id===0){
-                    alert("save");
-                    await saveArticuloManufacturadoInsumo(element, token);
-                }
-                else{
-
-                    const existingArticuloManufacturadoInsumo = await findArticuloManufacturadoInsumoById(
-                        element.id,
-                        token
-                    );
-
-                    if (
-                        element.cantidad !== existingArticuloManufacturadoInsumo.cantidad
-                    ) {
-                        // Al menos un campo ha cambiado, realizar la actualización del ArticuloManufacturadoInsumo
-                        alert("update manufacturado insumo");
-                        await updateArticuloManufacturadoInsumo(element.id, element, token);
-                     }
-                }
-            })    
-
-            
-            if(receta?.id===0){
-                alert("save receta");
-                
-                await saveReceta(receta, token);
-            }
-            else if (receta?.id) {
-
-                const existingReceta = await findByArticuloManufacturadoId(
-                    Number(idArticuloManufacturado),
-                    token
-                );
-
-                if (receta?.descripcion !== existingReceta.descripcion) {
-                    alert("Actualizar receta");
-                    await updateReceta(receta.id, receta, token);
-                }
-            }
-
-        }     
-    }
+    };
 
     const handleDescripcionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = event.target;
@@ -269,7 +256,7 @@ export const ArticuloManufacturadoReceta = () =>{
                 )}
                 <div className="d-flex justify-content-center">
                     <Button variant="dark" id="button" onClick={handleCancelar}>
-                        Cancelar
+                        Volver
                     </Button>
                     <Button variant="dark" id="button" onClick={handleModificar}>
                         Modificar Cambios

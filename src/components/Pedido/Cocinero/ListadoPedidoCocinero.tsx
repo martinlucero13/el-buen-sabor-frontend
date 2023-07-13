@@ -42,11 +42,11 @@ const ListadoPedidoCocinero: React.FC = () => {
 
   }
 
-  const actualizarEstadoPedido = async (id:number,pedido: Pedido) => {
+  const actualizarEstadoPedido = async (id:number) => {
     try {
       const token = await getAccessTokenSilently();
 
-      const pedidoActualizado = await cambiarEstado(id, pedido,token);
+      const pedidoActualizado = await cambiarEstado(id, "Listo", token);
       setPedidos((prevPedidos) => prevPedidos.filter((p) => p.id !== pedidoActualizado.id));
 
 
