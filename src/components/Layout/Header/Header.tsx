@@ -6,6 +6,9 @@ function HeaderHome(): JSX.Element {
     return (
         <Nav justify variant="tabs" className="header-home">
             <Nav.Item>
+                <Nav.Link as={Link} to="/productos/all" id='boton-pizzas'>Todos</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
                 <Nav.Link as={Link} to="/productos/pizza" id='boton-pizzas'>Pizzas</Nav.Link>
             </Nav.Item>
             <Nav.Item>
