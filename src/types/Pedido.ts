@@ -13,4 +13,5 @@ export interface Pedido extends GenericTypes{
     cliente: Cliente;
     tipoEntregaPedido?: TipoEntregaPedido;
     tipoPagoPedido?: TipoPagoPedido;
+    total: number;
 }

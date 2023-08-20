@@ -19,9 +19,9 @@ function HeaderAdmin(): JSX.Element {
             </Nav.Item>
             <Nav.Item>
                 <NavDropdown title="Estadísticas" id="estadisticas-dropdown">
-                    <NavDropdown.Item as={Link} to="/admin/">Clientes</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/admin/">Productos</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/admin/">Monetarios</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/admin/estadistica/clientes">Clientes</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/admin/estadistica/productos">Productos</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/admin/estadistica/monetarios">Monetarios</NavDropdown.Item>
                 </NavDropdown>
             </Nav.Item>
             <Nav.Item>
