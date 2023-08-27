@@ -1,5 +1,4 @@
 import { URL_API_BASE } from "../constants";
-import { GenericService } from "./GenericService";
 
 
 export async function findImagenByName(nombre: string, token: string) {

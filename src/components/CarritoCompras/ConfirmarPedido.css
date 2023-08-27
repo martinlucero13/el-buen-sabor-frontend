@@ -9,6 +9,7 @@
     border-right: 1px solid #000;
     background-color: #F8F9FA;
 }
+
 .contenedor{
     background-color: #DEE2E6;
     max-width: 416px;
@@ -20,6 +21,12 @@
     background-color: #F8F9FA;
     border: 1px solid #000;
     margin-top: 40px;
+}
+
+
+.form-domicilio{
+    border-radius: 0%;
+    background-color: transparent;
 }
 
 #detalle-total{

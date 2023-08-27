@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import UserButton from "../../Auth0/UserButton";
@@ -8,10 +8,14 @@ import "./NavBar.css";
 import logo from "../../../assets/logo.png";
 import cart3 from "../../../assets/cart3.svg";
 import { Navbar, Nav, Container, Form, Button, InputGroup } from "react-bootstrap";
+import { CarritoContext } from "../../Context/CarritoContext"; // Ajusta la ruta según tu estructura de carpetas
+
+
 
 function NavBar(): JSX.Element {
   const { isAuthenticated } = useAuth0();
   const [search, setSearch] = useState<string>("all");
+  const { carrito } = useContext(CarritoContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -76,6 +80,7 @@ function NavBar(): JSX.Element {
             }
             <Nav.Link>
               <img src={cart3} alt="cart3" width="32px" className="link-cart3" onClick={handleNavigateCarrito}/>
+              <span className="cart-badge">{carrito.length}</span>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

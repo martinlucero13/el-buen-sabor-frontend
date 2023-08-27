@@ -9,6 +9,7 @@ import "./ArticuloManufacturadoAbm.css";
 //Services
 import { findAllRubro,findRubroById } from "../../services/RubroService";
 import { findArticuloManufacturadoById, saveArticuloManufacturado, updateArticuloManufacturado } from "../../services/ArticuloManufacturadoService";
+import { saveImagen } from "../../services/ImagenService";
 
 //Types
 import { Rubro } from '../../types/Rubro';
@@ -22,6 +23,7 @@ import {validateNumericInput} from '../../util/numerosUtil';
 
 
 
+
 export const ArticuloManufacturadoAbm = () =>{
   const {idArticulo: idArticuloManufacturado} = useParams();
   const [rubros, setRubros] = useState<Array<Rubro>>([]);
@@ -30,6 +32,7 @@ export const ArticuloManufacturadoAbm = () =>{
   const { getAccessTokenSilently } = useAuth0();
   const currentPath = location.pathname;
   let modifiedPath = currentPath.replace(`/articulom/abm/${idArticuloManufacturado}`, '/articulom');
+  const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
 
   
   //Traer todos los rubros de producto
@@ -136,6 +139,16 @@ export const ArticuloManufacturadoAbm = () =>{
           articuloManufacturado.articuloManufacturadoPrecioVenta.fecha = fechaActual;  //Asignamos la fecha
           const token = await getAccessTokenSilently();
           let idNuevoArticulo:number=0;
+
+          if (selectedImageFile && articuloManufacturado?.imagen?.nombre) {
+            alert("Entra a imagen"+ selectedImageFile.name);
+            //if(articuloManufacturado.imagen.id==0){
+            await saveImagen(selectedImageFile, selectedImageFile.name, token);
+            /*}
+            else{
+              await updateImagen(selectedImageFile, articuloManufacturado.imagen.nombre, token);
+            }*/
+          }  
           if (idArticuloManufacturado === "0") {
             alert("save");
             idNuevoArticulo = await saveArticuloManufacturado(articuloManufacturado, token);
@@ -143,6 +156,9 @@ export const ArticuloManufacturadoAbm = () =>{
             alert("update");
             await updateArticuloManufacturado(Number(idArticuloManufacturado), articuloManufacturado, token);
           }
+
+
+
           const confirmarSeguirEditando = window.confirm("¿Desea seguir editando?");
           if (!confirmarSeguirEditando) {
             window.location.href=(modifiedPath);
@@ -175,7 +191,7 @@ export const ArticuloManufacturadoAbm = () =>{
   const handleImagenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
-      
+      setSelectedImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setArticuloManufacturado((prevArticuloManufacturado) => {

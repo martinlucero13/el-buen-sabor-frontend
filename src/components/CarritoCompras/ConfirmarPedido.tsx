@@ -6,6 +6,8 @@ import './ConfirmarPedido.css'
 //Types
 import { DetallePedido } from '../../types/DetallePedido';
 
+//Util
+import {validateNumericInput} from '../../util/numerosUtil';
 
 export const ConfirmarPedido = () => {
 
@@ -139,6 +141,19 @@ export const ConfirmarPedido = () => {
                         onChange={handleChangeFormaPago} // Manejar el cambio de forma de pago
                         />
                     </div>
+                    <div id="form-pago-efectivo">
+                        <label>Dirección</label>
+                        <Form.Control className="form-domicilio" type="text" name="denominacion" />
+                    </div>
+                    <div id="form-pago-efectivo">
+                        <label>Departamento</label>
+                        <Form.Control className="form-domicilio" type="text" name="denominacion" />
+                    </div>
+                    <div id="form-pago-efectivo">
+                        <label>Teléfono</label>
+                        <Form.Control className="form-domicilio" type="number" name="telefono" min={0} maxLength={10}onKeyDown={validateNumericInput}/>
+                    </div>
+                  
                 </Form>
             </Col>
         </Row>

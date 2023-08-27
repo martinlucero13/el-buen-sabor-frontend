@@ -25,6 +25,7 @@ const CarritoProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) =>
       cantidad: 1,
       subTotal: articulo.articuloManufacturadoPrecioVenta.precioVenta,
       articuloManufacturado: articulo,
+      pedido:0
       
     };
 
