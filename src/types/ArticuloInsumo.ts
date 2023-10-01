@@ -1,18 +1,20 @@
-import { ArticuloInsumoPrecioCompra } from "./ArticuloInsumoPrecioCompra";
-import { ArticuloInsumoStockActual } from "./ArticuloInsumoStockActual";
-import { ArticuloInsumoStockMinimo } from "./ArticuloInsumoStockMinimo";
+import { Base } from "./Base";
 import { Rubro } from "./Rubro";
 import { UnidadMedida } from "./UnidadMedida";
-import { GenericTypes } from "./GenericTypes";
 
-export interface ArticuloInsumo  extends GenericTypes{
-
+export interface ArticuloInsumo extends Base {
     denominacion: string;
-    esInsumo: boolean;
+    precioCompra: number;
+    bloqueado: boolean;
     unidadMedida: UnidadMedida;
-    articuloInsumoPrecioCompra: ArticuloInsumoPrecioCompra;
-    articuloInsumoStockMinimo: ArticuloInsumoStockMinimo;
-    articuloInsumoStockActual: ArticuloInsumoStockActual;
+    esInsumo?: boolean;
     rubro?: Rubro;
+    stockMinimo?: number;
+    stockActual?: number;
+}
 
+export interface ArticuloInsumoUpdate {
+    stockGanado: number;
+    stockPerdido: number;
+    precioCompra: number;
 }

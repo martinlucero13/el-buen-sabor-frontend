@@ -1,9 +1,6 @@
-import { ArticuloManufacturado } from './ArticuloManufacturado';
-import { GenericTypes } from './GenericTypes';
-export interface DetallePedido  extends GenericTypes{
+export interface DetallePedido{
     id: number;
     cantidad: number;
-    subTotal: number;
-    articuloManufacturado: ArticuloManufacturado;
+    articuloManufacturado: number;
     pedido: number | string;
 }

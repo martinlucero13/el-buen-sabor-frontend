@@ -1,8 +1,5 @@
-import { ArticuloManufacturado } from './ArticuloManufacturado';
-import { GenericTypes } from "./GenericTypes";
+import { Base } from "./Base";
 
-export interface Receta extends GenericTypes{
-
+export interface Receta extends Base {
     descripcion: string;
-    articuloManufacturado:ArticuloManufacturado;
 }

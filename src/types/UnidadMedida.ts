@@ -1,6 +1,7 @@
-import { GenericTypes } from "./GenericTypes";
-
-export interface UnidadMedida extends GenericTypes{
-
-    denominacion: string;
+export enum UnidadMedida {
+    GRAMOS = 'GRAMOS',
+    KILOGRAMOS = 'KILOGRAMOS',
+    MILILITROS = 'MILILITROS',
+    LITROS = 'LITROS',
+    UNIDADES = 'UNIDADES'
 }

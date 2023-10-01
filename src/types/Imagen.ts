@@ -1,7 +1,5 @@
-import { GenericTypes } from "./GenericTypes";
+import { Base } from "./Base";
 
-export interface Imagen extends GenericTypes{
-
+export interface Imagen extends Base {
     nombre: string;
-    imagenUrl?: string;
 }

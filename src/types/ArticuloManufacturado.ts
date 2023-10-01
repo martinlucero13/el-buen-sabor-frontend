@@ -1,15 +1,18 @@
-import { ArticuloManufacturadoPrecioVenta } from "./ArticuloManufacturadoPrecioVenta";
-import { Imagen } from "./Imagen";
-import { Rubro } from './Rubro';
-import { Receta } from './Receta';
-import { GenericTypes } from "./GenericTypes";
+import { Base } from "./Base";
+import { Rubro } from "./Rubro";
+import { DetalleArticuloManufacturado } from "./DetalleArticuloManufacturado";
 
-export interface ArticuloManufacturado extends GenericTypes{
+export interface ArticuloManufacturado extends Base {
     denominacion: string;
+    categoria: string;
+    imagen: string;
+    imagenURL: string;
+    stock: number;
+    precioVenta: number;
+    detalles: DetalleArticuloManufacturado[];
     descripcion: string;
-    tiempoEstimadoCocina: string; // TODO: Manejar tiempoEstimadoCocina como Date
-    imagen: Imagen;
-    articuloManufacturadoPrecioVenta: ArticuloManufacturadoPrecioVenta;
+    bloqueado?: boolean;
+    tiempoEstimadoCocina: string;
+    receta?: string;
     rubro?: Rubro;
-    receta?: Receta;
 }

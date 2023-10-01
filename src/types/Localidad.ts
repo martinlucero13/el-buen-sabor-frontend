@@ -1,6 +1,5 @@
-import { GenericTypes } from "./GenericTypes";
+import { Base } from "./Base";
 
-export interface Localidad extends GenericTypes{
-
+export interface Localidad extends Base {
     nombre: string;   
 }
