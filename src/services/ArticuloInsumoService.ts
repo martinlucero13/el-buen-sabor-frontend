@@ -1,27 +1,34 @@
+import { Endpoint } from "../types/Endpoint";
+import { ArticuloInsumo, ArticuloInsumoUpdate } from "../types/ArticuloInsumo";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_API_BASE_URL as string;
 
-import { ArticuloInsumo } from "../types/ArticuloInsumo";
-import { GenericService } from "./GenericService";
+/**
+ * Actualiza el Stock de un Artículo Insumo por su ID.
+ * 
+ * @param id ID del Artículo Insumo a Actualizar.
+ * @param entity Artículo Manufacturado Update a actualizar.
+ * @param token Token de autenticación.
+ * @returns Una promesa que se resuelve en el Artículo Insumo actualizado.
+ */
+export async function updateStockArticuloInsumo(id: number, entity: ArticuloInsumoUpdate, token: string): Promise<ArticuloInsumo> {
+    try {
+        const response = await fetch(`${API_BASE_URL}/${Endpoint.ArticuloInsumo}/updateStock/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(entity)
+        });
 
-export async function findAllArticuloInsumo(token: string) {
-  return GenericService<ArticuloInsumo[]>("articulos-insumos", "GET", token);
-}
-
-export async function findBebidas(token: string) {
-  return GenericService<ArticuloInsumo[]>("articulos-insumos/bebidas", "GET", token);
-}
-
-export async function findArticuloInsumoById(id: number, token: string) {
-  return GenericService<ArticuloInsumo>(`articulos-insumos/${id}`, "GET", token);
-}
-
-export async function saveArticuloInsumo(articuloInsumo: ArticuloInsumo, token: string) {
-  return GenericService<ArticuloInsumo>("articulos-insumos", "POST", token, articuloInsumo);
-}
-
-export async function updateArticuloInsumo(id: number, articuloInsumo: ArticuloInsumo, token: string) {
-  return GenericService<ArticuloInsumo>(`articulos-insumos/${id}`, "PUT", token, articuloInsumo);
-}
-
-export async function deleteArticuloInsumo(id: number, token: string) {
-  return GenericService<void>(`articulos-insumos/${id}`, "DELETE", token);
+        if (response.status === 201) {
+            const data = await response.json() as ArticuloInsumo;
+            return data;
+        } else {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(`Error! ${error}`);
+    }
 }
