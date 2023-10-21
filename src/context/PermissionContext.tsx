@@ -8,7 +8,6 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
  * Componente PermissionProvider y hook personalizado usePermission para manejar los permisos de usuario.
  * El PermissionProvider es un componente de contexto que proporciona el estado de permiso y la función para obtener los permisos del usuario.
  * El hook usePermission se utiliza para acceder a los datos de permiso proporcionados por el PermissionProvider.
- * @author Lucero
  */
 
 interface PermissionContextProps {

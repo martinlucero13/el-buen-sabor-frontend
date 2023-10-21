@@ -10,7 +10,7 @@ interface Props {
  * Componente de acceso condicional basado en los permisos del usuario.
  * @param children Elementos secundarios que se renderizarán si el acceso es permitido. 
  * @param request Lista de permisos requeridos para acceder al contenido.
- * @author Lucero 
+ * @author Bulos 
  */
 function PermissionAccess({ children, request }: Props): JSX.Element {
     const { permission } = usePermission();

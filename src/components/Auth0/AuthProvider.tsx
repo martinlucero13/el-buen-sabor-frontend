@@ -1,48 +1,42 @@
-import {ReactNode, useEffect} from "react";
-import {Auth0Provider, useAuth0} from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
+import { AppState, Auth0Provider } from "@auth0/auth0-react";
 
 interface Props {
-    children?: ReactNode;
-    initialAuthState: {
-        isAuthenticated: boolean;
-        idToken: string;
-    };
+    children: JSX.Element;
 }
 
-export function AuthProvider({ children, initialAuthState }: Props):JSX.Element{
+/**
+ *  proporciona el contexto de autenticación.
+ */
+function AuthProvider({ children }: Props) {
+    const navigate = useNavigate();
 
-    const { isAuthenticated, getIdTokenClaims } = useAuth0();
+    const domain = import.meta.env.VITE_AUTH0_DOMAIN;
+    const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
+    const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
+    const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL;
 
-    useEffect(() => {
-        const storeAuthState = async () => {
-            if (isAuthenticated) {
-                const idToken = await getIdTokenClaims();
-                localStorage.setItem(
-                    "authState",
-                    JSON.stringify({ isAuthenticated, idToken })
-                );
-            } else {
-                localStorage.removeItem("authState");
-            }
-        };
-        storeAuthState();
-    }, [isAuthenticated, getIdTokenClaims, initialAuthState]);
+    const onRedirectCallback = (appState: AppState | undefined) => {
+        navigate(appState?.returnTo || window.location.pathname);
+    };
 
-    const domain: string = import.meta.env.VITE_AUTH0_DOMAIN || "";
-    const clienteIdNormal: string = import.meta.env.VITE_AUTH0_CLIENT_ID || "";
-    const audienceNormal: string = import.meta.env.VITE_AUTH0_AUDIENCE || "";
+    if (!(domain && clientId && redirectUri)) {
+        return null;
+    }
 
     return (
         <Auth0Provider
             domain={domain}
-            clientId={clienteIdNormal}
+            clientId={clientId}
             authorizationParams={{
-                audience: audienceNormal,
-                redirect_uri: window.location.origin
-        }}
-            cacheLocation={"localstorage"}
+                audience: audience,
+                redirect_uri: redirectUri,
+            }}
+            onRedirectCallback={onRedirectCallback}
         >
-            {children}
+            { children }
         </Auth0Provider>
     );
 }
+
+export default AuthProvider;
