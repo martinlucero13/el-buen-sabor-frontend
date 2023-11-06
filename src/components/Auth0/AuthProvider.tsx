@@ -8,7 +8,7 @@ interface Props {
 /**
  *  proporciona el contexto de autenticación.
  */
-function AuthProvider({ children }: Props) {
+export function AuthProvider({ children }: Props) {
     const navigate = useNavigate();
 
     const domain = import.meta.env.VITE_AUTH0_DOMAIN;
@@ -39,4 +39,3 @@ function AuthProvider({ children }: Props) {
     );
 }
 
-export default AuthProvider;
