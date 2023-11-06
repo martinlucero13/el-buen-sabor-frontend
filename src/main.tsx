@@ -18,8 +18,8 @@ const initialAuthState = {
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <AuthProvider initialAuthState={initialAuthState}>
+
       <App />
-    </AuthProvider>
+
   </React.StrictMode>,
 );
