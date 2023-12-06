@@ -1,0 +1,20 @@
+.card-categoria {
+  height: 15rem;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.card-img-container {
+  height: 15rem;
+  overflow: hidden;
+}
+
+.img-categoria {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-categoria:hover {
+  transform: scale(1.01);
+  opacity: 0.8;
+}

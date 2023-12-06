@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Kanit:wght@900&display=swap");
+
+.container-empleado {
+  height: 50vh;
+}
+
+.title-bienvenida {
+  background: url("https://i.pinimg.com/474x/fb/43/65/fb43656f6e5ceaa905547eda5c6722fe.jpg");
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 150px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}

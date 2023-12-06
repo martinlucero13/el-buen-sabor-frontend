@@ -1,0 +1,18 @@
+[
+    {
+        "nombre": "Lomo",
+        "imagen": "/images/categoria-lomo.avif"
+    },
+    {
+        "nombre": "Pizza",
+        "imagen": "/images/categoria-pizza.avif"
+    },
+    {
+        "nombre": "Hamburguesa",
+        "imagen": "/images/categoria-hamburguesa.avif"
+    },
+    {
+        "nombre": "Bebida",
+        "imagen": "/images/categoria-bebida.avif"
+    }
+]

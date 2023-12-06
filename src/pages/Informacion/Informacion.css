@@ -1,0 +1,56 @@
+/* InformacionPage */
+.container-informacion {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  overflow: hidden;
+}
+
+.img-informacion {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-informacion {
+  border-radius: 100px;
+  border-color: #fff;
+}
+
+.btn-informacion:hover {
+  background-color: red;
+}
+
+/* ClientesPage */
+.card-clientes {
+  height: 20rem;
+}
+
+.container-img-persona {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.container-img-persona img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

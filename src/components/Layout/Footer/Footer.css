@@ -1,0 +1,14 @@
+.footer .nav-link {
+  padding: 0;
+  color: #fff;
+}
+
+.footer .nav-link:hover {
+  color: #ff9e00;
+  cursor: pointer;
+}
+
+.footer .nav-item:hover {
+  color: #ff9e00;
+  cursor: pointer;
+}

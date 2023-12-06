@@ -1,0 +1,10 @@
+.carrito-compras-bg {
+  color: #000;
+  background-color: #E9ECEF;
+}
+
+.img-producto img {
+  width: 125px;
+  height: 75px;
+  object-fit: cover;
+}

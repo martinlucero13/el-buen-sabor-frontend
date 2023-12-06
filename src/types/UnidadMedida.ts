@@ -1,0 +1,7 @@
+export enum UnidadMedida {
+    GRAMOS = 'GRAMOS',
+    KILOGRAMOS = 'KILOGRAMOS',
+    MILILITROS = 'MILILITROS',
+    LITROS = 'LITROS',
+    UNIDADES = 'UNIDADES'
+}
